@@ -13,11 +13,11 @@ function Header() {
   return (
     <div>
       <div className='text-center py-3'>
-      <h1>Lifestyle Rooms</h1>
+        <h1>Lifestyle Rooms</h1>
       </div>
    
       <form className="container">
-        <div className="form-row">
+        <div className="form-row align-items-end">
           <div className="form-group col-md-4">
             <label htmlFor="dropdown1">Room style</label>
             <select id="dropdown1" name="dropdown1" className="form-control">
@@ -43,8 +43,8 @@ function Header() {
           </div>
         </div>
 
-        <div className="form-row">
-        <div className="form-group col-md-4">
+        <div className="form-row align-items-end">
+          <div className="form-group col-md-4">
             <label htmlFor="dropdown4">Angle</label>
             <select id="dropdown4" name="dropdown4" className="form-control">
               <option value="">Select angle</option>
@@ -69,27 +69,25 @@ function Header() {
           </div>
         </div>
 
-
-        <div className="form-row">
-          <div className="form-group col-md-6">
+        <div className="form-row align-items-end">
+          <div className="form-group col-md-10">
             <label htmlFor="searchBar">Search</label>
             <div className="input-group">
-            <input
-              type="text"
-              id="searchBar"
-              name="searchBar"
-              className="form-control"
-              placeholder="Enter your search term"
-            />
-             <button type="submit" className="btn btn-primary ml-2">
-              Search
-            </button>
+              <input
+                type="text"
+                id="searchBar"
+                name="searchBar"
+                className="form-control"
+                placeholder="Enter your search term"
+              />
             </div>
           </div>
 
-          
-           
-          
+          <div className="form-group col-md-2">
+            <button type="submit" className="btn btn-primary btn-block">
+              Search
+            </button>
+          </div>
         </div>
       </form>
     </div>
