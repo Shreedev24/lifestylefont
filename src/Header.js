@@ -11,12 +11,12 @@ function Header() {
   };
 
   return (
-    <div>
+    <div className="container">
       <div className='text-center py-3'>
         <h1>Lifestyle Rooms</h1>
       </div>
    
-      <form className="container">
+      
         <div className="form-row align-items-end">
           <div className="form-group col-md-4">
             <label htmlFor="dropdown1">Room style</label>
@@ -89,8 +89,9 @@ function Header() {
             </button>
           </div>
         </div>
-      </form>
-    </div>
+
+        
+      </div>
   );
 }
 
