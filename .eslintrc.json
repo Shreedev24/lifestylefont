@@ -9,7 +9,8 @@
           "react/jsx-uses-vars": "error",
           "react/jsx-uses-react": "error",
           "react/display-name": "off",
-          "react/react-in-jsx-scope": "off"
+          "react/react-in-jsx-scope": "off",
+          "react/jsx-key": [1, { "checkFragmentShorthand": true }]
       },
     "parserOptions": {
       "ecmaVersion": 2016,

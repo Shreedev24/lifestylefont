@@ -1,5 +1,7 @@
-import React from 'react';
+import React,{useState,useEffect } from 'react';
+import axios from 'axios';
 import roomdata from './roomdata.json';
+import Card from 'react-bootstrap/Card';
 
 function Header() {
   const renderDropdownOptions = (key) => {
@@ -9,6 +11,31 @@ function Header() {
       </option>
     ));
   };
+
+  const [APIData, setAPIData] = useState([]);
+  const [filteredResults, setFilteredResults] = useState([]);
+  const [searchInput, setSearchInput] = useState('');
+  useEffect(() => {
+    axios.get(`https://jsonplaceholder.typicode.com/users`)
+        .then((response) => {
+            setAPIData(response.data);
+        })
+  }, [])
+
+  const searchItems = (searchValue) => {
+    
+    setSearchInput(searchValue)
+    if (searchInput !== '') {
+        const filteredData = APIData.filter((item) => {
+            return Object.values(item).join('').toLowerCase().includes(searchInput.toLowerCase())
+        })
+        console.log("filteredData",filteredData)
+        setFilteredResults(filteredData)
+    }
+    else{
+        setFilteredResults(APIData)
+    }
+  }
 
   return (
     <div className="container">
@@ -79,6 +106,7 @@ function Header() {
                 name="searchBar"
                 className="form-control"
                 placeholder="Enter your search term"
+                onChange={(e) => searchItems(e.target.value)}
               />
             </div>
           </div>
@@ -90,6 +118,36 @@ function Header() {
           </div>
         </div>
 
+
+        <Card itemsPerRow={3} style={{ marginTop: 20 }}>
+                {searchInput.length > 1 ? (
+                    filteredResults.map((item) => {
+                        return (
+                            <Card key={item.id}>
+                                <Card.Body>
+                                    <Card.Header>{item.name}</Card.Header>
+                                    <Card.Text>
+                                        {item.email}
+                                    </Card.Text>
+                                </Card.Body>
+                            </Card>
+                        )
+                    })
+                ) : (
+                    APIData.map((item) => {
+                        return (
+                            <Card key={item.id}>
+                                 <Card.Body>
+                                    <Card.Header>{item.name}</Card.Header>
+                                    <Card.Text>
+                                        {item.email}
+                                    </Card.Text>
+                                 </Card.Body>
+                            </Card>
+                        )
+                    })
+                )}
+            </Card>
         
       </div>
   );
