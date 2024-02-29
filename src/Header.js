@@ -12,7 +12,9 @@ function Header() {
 
   return (
     <div>
-      <h1>Life-style shorts</h1>
+      <div className='text-center py-3'>
+      <h1>Lifestyle Rooms</h1>
+      </div>
    
       <form className="container">
         <div className="form-row">
@@ -70,7 +72,8 @@ function Header() {
 
         <div className="form-row">
           <div className="form-group col-md-6">
-            <label htmlFor="searchBar">Search:</label>
+            <label htmlFor="searchBar">Search</label>
+            <div className="input-group">
             <input
               type="text"
               id="searchBar"
@@ -78,13 +81,15 @@ function Header() {
               className="form-control"
               placeholder="Enter your search term"
             />
-          </div>
-
-          <div className="form-group col-md-6">
-            <button type="submit" className="btn btn-primary">
+             <button type="submit" className="btn btn-primary ml-2">
               Search
             </button>
+            </div>
           </div>
+
+          
+           
+          
         </div>
       </form>
     </div>
