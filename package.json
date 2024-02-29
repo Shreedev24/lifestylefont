@@ -3,6 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@types/jest": "^29.5.12",
+    "@types/node": "^20.11.22",
+    "@types/react": "^18.2.60",
+    "@types/react-dom": "^18.2.19",
     "bootstrap": "^4.6.2",
     "react": "^17.0.2",
     "react-bootstrap": "^1.6.6",
@@ -33,7 +37,9 @@
   },
   "devDependencies": {
     "eslint": "^8.57.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-react": "^7.33.2",
     "prettier": "^3.2.5",
-    "eslint-config-prettier": "^9.1.0"
+    "typescript": "^3.9.2"
   }
 }

@@ -1,6 +1,16 @@
 {
-    "extends": ["eslint:recommended", "prettier"],
-    "plugins": [],
+  "extends": [
+    "plugin:react/recommended"
+],
+      "plugins": [
+          "react"
+      ],
+      "rules": {
+          "react/jsx-uses-vars": "error",
+          "react/jsx-uses-react": "error",
+          "react/display-name": "off",
+          "react/react-in-jsx-scope": "off"
+      },
     "parserOptions": {
       "ecmaVersion": 2016,
       "sourceType": "module",
