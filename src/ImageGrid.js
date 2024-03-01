@@ -66,11 +66,11 @@ export default function ImageGrid() {
           <hr />
         </div>
       </div>
-      <div className="row">
+        <div className="row">
           <div className="col-md-12 py-3">
               <div className='pl-3'>Results: {imageNames.length}</div>
           </div>
-      </div>
+        </div>
 
       
       <div className="row justify-content-center">
@@ -78,7 +78,7 @@ export default function ImageGrid() {
           imageNames.map((data, index) => (
             <div key={index} className="col-md-4 mb-3 d-flex justify-content-center">
               <img
-                src={`http://localhost:3002/Images/${data.image}`} 
+                src={`https://backendlifestyle.netlify.app/images/${data.image}`} 
                 alt={`Image ${index + 1}`}
                 className="img-fluid"
               />
