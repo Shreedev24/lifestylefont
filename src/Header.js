@@ -32,6 +32,7 @@ function Header() {
       })
     }
 
+    
   useEffect(() => {
     axios.get(`https://jsonplaceholder.typicode.com/users`)
         .then((response) => {
