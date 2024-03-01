@@ -73,7 +73,7 @@ export default function ImageGrid() {
         </div>
 
       
-      <div className="row justify-content-center">
+      <div className="row justify-content-left">
         {(
           imageNames.map((data, index) => (
             <div key={index} className="col-md-4 mb-3 d-flex justify-content-center">
