@@ -15,6 +15,12 @@ function Header() {
   const [APIData, setAPIData] = useState([]);
   const [filteredResults, setFilteredResults] = useState([]);
   const [searchInput, setSearchInput] = useState('');
+  const [selectedRoomType] = useState('');
+  const [selectedProduct, setSelectedProduct] = useState('');
+  const [selectedColor, setSelectedColor] = useState('');
+  const [selectedAngle, setSelectedAngle] = useState('');
+  const [selectedRoomLight, setSelectedRoomLight] = useState('');
+  const [selectedTone, setSelectedTone] = useState('');
   useEffect(() => {
     axios.get(`https://jsonplaceholder.typicode.com/users`)
         .then((response) => {
