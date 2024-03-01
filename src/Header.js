@@ -21,6 +21,17 @@ function Header() {
   const [selectedAngle, setSelectedAngle] = useState('');
   const [selectedRoomLight, setSelectedRoomLight] = useState('');
   const [selectedTone, setSelectedTone] = useState('');
+
+
+  const handleclick = async () => {
+   console.log("handleclick")
+      axios.get(`https://data-7.onrender.com/api/lifestyle`)
+      .then((response) => {
+        console.log("response",response)
+          setAPIData(response.data);    
+      })
+    }
+
   useEffect(() => {
     axios.get(`https://jsonplaceholder.typicode.com/users`)
         .then((response) => {
@@ -118,11 +129,14 @@ function Header() {
           </div>
 
           <div className="form-group col-md-2">
-            <button type="submit" className="btn btn-primary btn-block">
+            <button type="submit" className="btn btn-primary btn-block" onClick={handleclick}>
               Search
             </button>
           </div>
         </div>
+        {/* <div>
+        <input className='album_id' required="required" placeholder='Enter an ID' value={id} onChange={e => setId(e.target.value)} />
+        </div> */}
 
 
         <Card itemsPerRow={3} style={{ marginTop: 20 }}>
