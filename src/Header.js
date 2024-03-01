@@ -15,24 +15,43 @@ function Header() {
   const [APIData, setAPIData] = useState([]);
   const [filteredResults, setFilteredResults] = useState([]);
   const [searchInput, setSearchInput] = useState('');
-  const [selectedRoomType] = useState('');
-  const [selectedProduct, setSelectedProduct] = useState('');
-  const [selectedColor, setSelectedColor] = useState('');
-  const [selectedAngle, setSelectedAngle] = useState('');
-  const [selectedRoomLight, setSelectedRoomLight] = useState('');
-  const [selectedTone, setSelectedTone] = useState('');
+  const [setRoomType, setSelectedRoomType] = useState('');
+  const [setProduct, setSelectedProduct] = useState('');
+  const [setColor, setSelectedColor] = useState('');
+  const [setAngle, setSelectedAngle] = useState('');
+  const [setRoomLight, setSelectedRoomLight] = useState('');
+  const [setTone, setSelectedTone] = useState('');
 
 
-  const handleclick = async () => {
-   console.log("handleclick")
-      axios.get(`https://data-7.onrender.com/api/lifestyle`)
-      .then((response) => {
-        console.log("response",response)
-          setAPIData(response.data);    
-      })
-    }
+  // const handleclick = () => {
+  //     axios.post(`https://data-7.onrender.com/api/lifestyle`)
+  //     .then((response) => {
+  //       console.log("response",response)
+  //         setAPIData(response.data);    
+  //     })
+  // }
 
+  const handleclick = () => {
     
+    const dataToSend = {
+      RoomType: setRoomType,
+      Product: setProduct,
+      Color: setColor,
+      Angle: setAngle,
+      RoomLight: setRoomLight,
+      Tone: setTone
+    };
+
+   
+  axios.post('https://data-7.onrender.com/api/lifestyle', dataToSend )
+  .then(response => {
+    console.log('API response:', response.data);
+  })
+  .catch(error => {
+  console.error('Error:', error);
+  });
+  };
+
   useEffect(() => {
     axios.get(`https://jsonplaceholder.typicode.com/users`)
         .then((response) => {
@@ -42,7 +61,7 @@ function Header() {
 
   const searchItems = (searchValue) => {
     
-    setSearchInput(searchValue)
+  setSearchInput(searchValue)
     if (searchInput !== '') {
         const filteredData = APIData.filter((item) => {
             return Object.values(item).join('').toLowerCase().includes(searchInput.toLowerCase())
@@ -65,7 +84,7 @@ function Header() {
         <div className="form-row align-items-end">
           <div className="form-group col-md-4">
             <label htmlFor="dropdown1">Room style</label>
-            <select id="dropdown1" name="dropdown1" className="form-control">
+            <select id="dropdown1" name="dropdown1" className="form-control" value={setRoomType} onChange={(e) => setSelectedRoomType(e.target.value)}>
               <option value="">Select Style</option>
               {renderDropdownOptions('roomType')}
             </select>
@@ -73,7 +92,7 @@ function Header() {
 
           <div className="form-group col-md-4">
             <label htmlFor="dropdown2">Product</label>
-            <select id="dropdown2" name="dropdown2" className="form-control">
+            <select id="dropdown2" name="dropdown2" className="form-control" value={setProduct} onChange={(e) => setSelectedProduct(e.target.value)}>
               <option value="">Select Product</option>
               {renderDropdownOptions('product')}
             </select>
@@ -81,7 +100,7 @@ function Header() {
 
           <div className="form-group col-md-4">
             <label htmlFor="dropdown3">Color</label>
-            <select id="dropdown3" name="dropdown3" className="form-control">
+            <select id="dropdown3" name="dropdown3" className="form-control" value={setColor} onChange={(e) => setSelectedColor(e.target.value)}>
               <option value="">Select Color</option>
               {renderDropdownOptions('color')}
             </select>
@@ -91,7 +110,7 @@ function Header() {
         <div className="form-row align-items-end">
           <div className="form-group col-md-4">
             <label htmlFor="dropdown4">Angle</label>
-            <select id="dropdown4" name="dropdown4" className="form-control">
+            <select id="dropdown4" name="dropdown4" className="form-control" value={setAngle} onChange={(e) => setSelectedAngle(e.target.value)}>
               <option value="">Select angle</option>
               {renderDropdownOptions('angle')}
             </select>
@@ -99,7 +118,7 @@ function Header() {
 
           <div className="form-group col-md-4">
             <label htmlFor="dropdown5">Room light</label>
-            <select id="dropdown5" name="dropdown5" className="form-control">
+            <select id="dropdown5" name="dropdown5" className="form-control" value={setRoomLight} onChange={(e) => setSelectedRoomLight(e.target.value)}>
               <option value="">Select room light</option>
               {renderDropdownOptions('roomlight')}
             </select>
@@ -107,11 +126,12 @@ function Header() {
 
           <div className="form-group col-md-4">
             <label htmlFor="dropdown6">Tone</label>
-            <select id="dropdown6" name="dropdown6" className="form-control">
+            <select id="dropdown6" name="dropdown6" className="form-control" value={setTone} onChange={(e) => setSelectedTone(e.target.value)}>
               <option value="">Select tone</option>
               {renderDropdownOptions('tone')}
             </select>
           </div>
+             
         </div>
 
         <div className="form-row align-items-end">
@@ -135,9 +155,6 @@ function Header() {
             </button>
           </div>
         </div>
-        {/* <div>
-        <input className='album_id' required="required" placeholder='Enter an ID' value={id} onChange={e => setId(e.target.value)} />
-        </div> */}
 
 
         <Card itemsPerRow={3} style={{ marginTop: 20 }}>
