@@ -4,6 +4,5 @@
     "angle": ["Front", "Side", "Top", "Isometric", "Close-up", "Room view"],
     "color": ["Brown", "Cream", "White", "Grey", "Orange"],
     "roomlight": ["Bright", "Soft", "Dim", "Natural"],
-    "tone": ["Warm", "Cool", "Neutral"],
-    "images": ["https://placekitten.com/300/200", "https://placekitten.com/300/201", "https://placekitten.com/300/202"]
+    "tone": ["Warm", "Cool", "Neutral"]
 }

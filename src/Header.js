@@ -34,15 +34,14 @@ function Header() {
   const handleclick = () => {
     
     const dataToSend = {
-      RoomType: setRoomType,
-      Product: setProduct,
-      Color: setColor,
-      Angle: setAngle,
-      RoomLight: setRoomLight,
-      Tone: setTone
+      roomtype: setRoomType,
+      product: setProduct,
+      color: setColor,
+      angle: setAngle,
+      roomLight: setRoomLight,
+      tone: setTone
     };
-
-   
+ 
   axios.post('https://data-7.onrender.com/api/lifestyle', dataToSend )
   .then(response => {
     console.log('API response:', response.data);
@@ -52,27 +51,27 @@ function Header() {
   });
   };
 
-  useEffect(() => {
-    axios.get(`https://jsonplaceholder.typicode.com/users`)
-        .then((response) => {
-            setAPIData(response.data);
-        })
-  }, [])
+  // useEffect(() => {
+  //   axios.get(`https://jsonplaceholder.typicode.com/users`)
+  //       .then((response) => {
+  //           setAPIData(response.data);
+  //       })
+  // }, [])
 
-  const searchItems = (searchValue) => {
+  // const searchItems = (searchValue) => {
     
-  setSearchInput(searchValue)
-    if (searchInput !== '') {
-        const filteredData = APIData.filter((item) => {
-            return Object.values(item).join('').toLowerCase().includes(searchInput.toLowerCase())
-        })
-        console.log("filteredData",filteredData)
-        setFilteredResults(filteredData)
-    }
-    else{
-        setFilteredResults(APIData)
-    }
-  }
+  // setSearchInput(searchValue)
+  //   if (searchInput !== '') {
+  //       const filteredData = APIData.filter((item) => {
+  //           return Object.values(item).join('').toLowerCase().includes(searchInput.toLowerCase())
+  //       })
+  //       console.log("filteredData",filteredData)
+  //       setFilteredResults(filteredData)
+  //   }
+  //   else{
+  //       setFilteredResults(APIData)
+  //   }
+  // }
 
   return (
     <div className="container">
@@ -157,7 +156,7 @@ function Header() {
         </div>
 
 
-        <Card itemsPerRow={3} style={{ marginTop: 20 }}>
+        {/* <Card itemsPerRow={3} style={{ marginTop: 20 }}>
                 {searchInput.length > 1 ? (
                     filteredResults.map((item) => {
                         return (
@@ -185,7 +184,7 @@ function Header() {
                         )
                     })
                 )}
-            </Card>
+            </Card> */}
         
       </div>
   );
