@@ -61,7 +61,7 @@ function Header() {
   }, [])
 
   const searchItems = (searchValue) => {
-    
+               
   setSearchInput(searchValue)
     if (searchInput !== '') {
         const filteredData = APIData.filter((item) => {
