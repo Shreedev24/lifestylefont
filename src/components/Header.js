@@ -83,24 +83,24 @@ function Header() {
       
         <div className="form-row align-items-end">
           <div className="form-group col-md-4">
-            <label htmlFor="dropdown1">Room style</label>
-            <select id="dropdown1" name="dropdown1" className="form-control" value={setRoomType} onChange={(e) => setSelectedRoomType(e.target.value)}>
+            <label htmlFor="roomType">Room style</label>
+            <select id="roomType" name="roomType" className="form-control" value={setRoomType} onChange={(e) => setSelectedRoomType(e.target.value)}>
               <option value="">Select Style</option>
               {renderDropdownOptions('roomType')}
             </select>
           </div>
 
           <div className="form-group col-md-4">
-            <label htmlFor="dropdown2">Product</label>
-            <select id="dropdown2" name="dropdown2" className="form-control" value={setProduct} onChange={(e) => setSelectedProduct(e.target.value)}>
+            <label htmlFor="product">Product</label>
+            <select id="product" name="product" className="form-control" value={setProduct} onChange={(e) => setSelectedProduct(e.target.value)}>
               <option value="">Select Product</option>
               {renderDropdownOptions('product')}
             </select>
           </div>
 
           <div className="form-group col-md-4">
-            <label htmlFor="dropdown3">Color</label>
-            <select id="dropdown3" name="dropdown3" className="form-control" value={setColor} onChange={(e) => setSelectedColor(e.target.value)}>
+            <label htmlFor="color">Color</label>
+            <select id="color" name="color" className="form-control" value={setColor} onChange={(e) => setSelectedColor(e.target.value)}>
               <option value="">Select Color</option>
               {renderDropdownOptions('color')}
             </select>
@@ -109,24 +109,24 @@ function Header() {
 
         <div className="form-row align-items-end">
           <div className="form-group col-md-4">
-            <label htmlFor="dropdown4">Angle</label>
-            <select id="dropdown4" name="dropdown4" className="form-control" value={setAngle} onChange={(e) => setSelectedAngle(e.target.value)}>
+            <label htmlFor="angle">Angle</label>
+            <select id="angle" name="angle" className="form-control" value={setAngle} onChange={(e) => setSelectedAngle(e.target.value)}>
               <option value="">Select angle</option>
               {renderDropdownOptions('angle')}
             </select>
           </div>
 
           <div className="form-group col-md-4">
-            <label htmlFor="dropdown5">Room light</label>
-            <select id="dropdown5" name="dropdown5" className="form-control" value={setRoomLight} onChange={(e) => setSelectedRoomLight(e.target.value)}>
+            <label htmlFor="roomlight">Room light</label>
+            <select id="roomlight" name="roomlight" className="form-control" value={setRoomLight} onChange={(e) => setSelectedRoomLight(e.target.value)}>
               <option value="">Select room light</option>
               {renderDropdownOptions('roomlight')}
             </select>
           </div>
 
           <div className="form-group col-md-4">
-            <label htmlFor="dropdown6">Tone</label>
-            <select id="dropdown6" name="dropdown6" className="form-control" value={setTone} onChange={(e) => setSelectedTone(e.target.value)}>
+            <label htmlFor="tone">Tone</label>
+            <select id="tone" name="tone" className="form-control" value={setTone} onChange={(e) => setSelectedTone(e.target.value)}>
               <option value="">Select tone</option>
               {renderDropdownOptions('tone')}
             </select>

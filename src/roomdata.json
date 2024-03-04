@@ -3,6 +3,6 @@
     "product": ["Sofas", "Beds", "Dining Table", "Bookshelves", "Chairs", "Tables", "TV Unit", "Cabinet", "Shoe racks", "Wardrobe", "Coffee Tables", "Recliners", "Sideboards", "Desks", "Garden furniture", "Kids furniture", "Chest of drawers"],
     "angle": ["Front", "Side", "Top", "Isometric", "Close-up", "Room view"],
     "color": ["Brown", "Cream", "White", "Grey", "Orange"],
-    "roomlight": ["Bright", "Soft", "Dim", "Natural"],
+    "roomLight": ["Bright", "Soft", "Dim", "Natural"],
     "tone": ["Warm", "Cool", "Neutral"]
 }
