@@ -2,6 +2,7 @@ import React,{useState,useEffect } from 'react';
 import axios from 'axios';
 import roomdata from '../roomdata.json';
 import Card from 'react-bootstrap/Card';
+import { Link } from "react-router-dom";
 
 function Header() {
   const renderDropdownOptions = (key) => {
@@ -76,8 +77,9 @@ function Header() {
 
   return (
     <div className="container">
-      <div className='text-center py-3'>
-        <h1>Lifestyle Rooms</h1>
+      <div className=' py-3 w-100'>
+        <h1 className='text-center'>Lifestyle Rooms</h1>
+        <p className='text-right'><Link to="/add">Add New</Link></p>
       </div>
    
       
