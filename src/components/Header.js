@@ -22,7 +22,7 @@ function Header() {
   const [setAngle, setSelectedAngle] = useState('');
   const [setRoomLight, setSelectedRoomLight] = useState('');
   const [setTone, setSelectedTone] = useState('');
-
+ 
 
   // const handleclick = () => {
   //     axios.post(`https://data-7.onrender.com/api/lifestyle`)
@@ -52,28 +52,6 @@ function Header() {
   console.error('Error:', error);
   });
   };
-
-  useEffect(() => {
-    axios.get(`https://jsonplaceholder.typicode.com/users`)
-        .then((response) => {
-            setAPIData(response.data);
-        })
-  }, [])
-
-  const searchItems = (searchValue) => {
-    
-  setSearchInput(searchValue)
-    if (searchInput !== '') {
-        const filteredData = APIData.filter((item) => {
-            return Object.values(item).join('').toLowerCase().includes(searchInput.toLowerCase())
-        })
-        console.log("filteredData",filteredData)
-        setFilteredResults(filteredData)
-    }
-    else{
-        setFilteredResults(APIData)
-    }
-  }
 
   return (
     <div className="container">
@@ -157,38 +135,6 @@ function Header() {
             </button>
           </div>
         </div>
-
-
-        <Card itemsPerRow={3} style={{ marginTop: 20 }}>
-                {searchInput.length > 1 ? (
-                    filteredResults.map((item) => {
-                        return (
-                            <Card key={item.id}>
-                                <Card.Body>
-                                    <Card.Header>{item.name}</Card.Header>
-                                    <Card.Text>
-                                        {item.email}
-                                    </Card.Text>
-                                </Card.Body>
-                            </Card>
-                        )
-                    })
-                ) : (
-                    APIData.map((item) => {
-                        return (
-                            <Card key={item.id}>
-                                 <Card.Body>
-                                    <Card.Header>{item.name}</Card.Header>
-                                    <Card.Text>
-                                        {item.email}
-                                    </Card.Text>
-                                 </Card.Body>
-                            </Card>
-                        )
-                    })
-                )}
-            </Card>
-        
       </div>
   );
 }
