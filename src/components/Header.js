@@ -117,10 +117,10 @@ function Header() {
           </div>
 
           <div className="form-group col-md-4">
-            <label htmlFor="roomlight">Room light</label>
-            <select id="roomlight" name="roomlight" className="form-control" value={setRoomLight} onChange={(e) => setSelectedRoomLight(e.target.value)}>
+            <label htmlFor="roomLight">Room light</label>
+            <select id="roomLight" name="roomLight" className="form-control" value={setRoomLight} onChange={(e) => setSelectedRoomLight(e.target.value)}>
               <option value="">Select room light</option>
-              {renderDropdownOptions('roomlight')}
+              {renderDropdownOptions('roomLight')}
             </select>
           </div>
 
