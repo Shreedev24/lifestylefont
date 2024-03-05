@@ -78,7 +78,7 @@ function Header() {
 
         <div className="form-row align-items-end">
           <div className="form-group col-md-4">
-            <label htmlFor="roomType">Room style</label>
+            <label htmlFor="roomType">Room Type</label>
             <select
               id="roomType"
               name="roomType"
@@ -86,7 +86,7 @@ function Header() {
               value={setRoomType}
               onChange={(e) => setSelectedRoomType(e.target.value)}
             >
-              <option value="">Select Style</option>
+              <option value="">Select Type</option>
               {renderDropdownOptions("roomType")}
             </select>
           </div>
