@@ -14,8 +14,6 @@ function Header() {
   };
 
   const [APIData, setAPIData] = useState([]);
-  const [filteredResults, setFilteredResults] = useState([]);
-  const [searchInput, setSearchInput] = useState("");
   const [setRoomType, setSelectedRoomType] = useState("");
   const [setProduct, setSelectedProduct] = useState("");
   const [setColor, setSelectedColor] = useState("");
