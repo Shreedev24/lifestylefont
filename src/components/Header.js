@@ -22,20 +22,9 @@ function Header() {
   const [setAngle, setSelectedAngle] = useState("");
   const [setRoomLight, setSelectedRoomLight] = useState("");
   const [setTone, setSelectedTone] = useState("");
+  const [setSearchBar, setSelectedSearchBar] = useState("");
+
   var dataToSend = {};
-
-  const searchItems = (searchTerm) => {
-    const filteredResults = APIData.filter((data) => {
-      return (
-        data.product.includes(searchTerm) ||
-        data.roomType.includes(searchTerm) ||
-        data.color.includes(searchTerm) ||
-        data.roomLight.includes(searchTerm)
-      );
-    });
-
-    setFilteredResults(filteredResults);
-  };
 
   const listImages = () => {
     dataToSend = {
@@ -45,6 +34,7 @@ function Header() {
       angle: setAngle,
       roomLight: setRoomLight,
       tone: setTone,
+      searchBar: setSearchBar,
     };
 
     console.log(dataToSend);
@@ -184,7 +174,7 @@ function Header() {
                 name="searchBar"
                 className="form-control"
                 placeholder="Enter your search term"
-                onChange={(e) => searchItems(e.target.value)}
+                onBlur={(e) => setSelectedSearchBar(e.target.value)}
               />
             </div>
           </div>
