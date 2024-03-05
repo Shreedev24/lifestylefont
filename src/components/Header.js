@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import roomdata from "../roomdata.json";
 import Card from "react-bootstrap/Card";
@@ -69,6 +69,12 @@ function Header() {
   const handleclick = () => {
     listImages();
   };
+
+  useEffect(() => {
+    axios.get(`https://jsonplaceholder.typicode.com/users`).then((response) => {
+      setAPIData(response.data);
+    });
+  }, []);
 
   return (
     <>

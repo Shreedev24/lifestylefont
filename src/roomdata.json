@@ -1,5 +1,5 @@
 {
-    "roomType": ["Modern", "Scandinavian", "Contemporary", "Eclectic", "Industrial living room", "Minimalist", "Minimalist living room", "Rustic", "Asian", "Country", "Industrial", "Mediterranean", "Midcentury cool", "Retro", "Traditional"],
+    "roomType": ["Modern", "Scandinavian", "Contemporary", "Eclectic", "Minimalist", "Rustic", "Asian", "Country", "Industrial", "Mediterranean", "Midcentury cool", "Retro", "Traditional"],
     "product": ["Sofas", "Beds", "Dining Table", "Bookshelves", "Chairs", "Tables", "TV Unit", "Cabinet", "Shoe racks", "Wardrobe", "Coffee Tables", "Recliners", "Sideboards", "Desks", "Garden furniture", "Kids furniture", "Chest of drawers"],
     "angle": ["Front", "Side", "Top", "Isometric", "Close-up", "Room view"],
     "color": ["Brown", "Cream", "White", "Grey", "Orange"],
