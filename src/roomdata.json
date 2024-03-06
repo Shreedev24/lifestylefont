@@ -1,8 +1,9 @@
 {
-    "roomType": ["Modern", "Scandinavian", "Contemporary", "Eclectic", "Minimalist", "Rustic", "Asian", "Country", "Industrial", "Mediterranean", "Midcentury cool", "Retro", "Traditional"],
-    "product": ["Sofas", "Beds", "Dining Table", "Bookshelves", "Chairs", "Tables", "TV Unit", "Cabinet", "Shoe racks", "Wardrobe", "Coffee Tables", "Recliners", "Sideboards", "Desks", "Garden furniture", "Kids furniture", "Chest of drawers"],
+    "roomType": ["Modern", "Scandinavian", "Contemporary", "Eclectic", "Minimalist", "Rustic", "Asian", "Country", "Industrial", "Mediterranean", "Midcentury", "Retro", "Traditional", "Modern Maximalist", "Modern Farmhouse", "Coastal", "Boho"],
+    "product": ["Book shelf", "Side Table","Bedside","Chair","Sofas", "Beds", "Dining Table", "Bookshelves", "TV Unit", "Cabinet", "Shoe racks", "Wardrobe", "Coffee Tables", "Recliners", "Sideboards", "Desks", "Garden furniture", "Kids furniture", "Chest of drawers"],
     "angle": ["Front", "Side", "Top", "Isometric", "Close-up", "Room view"],
     "color": ["Brown", "Cream", "White", "Grey", "Orange"],
     "roomLight": ["Bright", "Soft", "Dim", "Natural"],
     "tone": ["Warm", "Cool", "Neutral"]
 }
+ 
