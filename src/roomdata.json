@@ -4,6 +4,6 @@
     "angle": ["Front", "Side", "Top", "Isometric", "Close-up", "Room view"],
     "color": ["Brown", "Cream", "White", "Grey", "Orange", "Golden", "Wooden", "Green", "yellow", "Black"],
     "roomLight": ["Bright", "Soft", "Dim", "Natural"],
-    "tone": ["Warm", "Cool", "Neutral"]
+    "tone": ["Warm", "Cool", "Neutral", "Dark", "light"]
 }
  
