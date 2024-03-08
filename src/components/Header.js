@@ -230,10 +230,13 @@ function Header() {
                   <div className="card-body">
                     <h5 className="card-title">{data.product}</h5>
                     <p className="card-text">Room Type: {data.roomType}</p>
-                    <p className="card-text">Color: {data.color}</p>
+                    <p className="card-text">
+                      product Color: {data.productcolor}
+                    </p>
+                    <p className="card-text">Room Color: {data.roomcolor}</p>
                     <p className="card-text">Room Light: {data.roomLight}</p>
                     <p className="card-text">Angle: {data.angle}</p>
-                    <p className="card-text">Tone: {data.tone}</p>
+                    <p className="card-text">Tone:{data.tone}</p>
                     <Link to={`Edit/${data._id}`}>Edit</Link>
                   </div>
                 </div>
