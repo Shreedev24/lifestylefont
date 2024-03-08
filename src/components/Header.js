@@ -274,11 +274,6 @@ function Header() {
                       </OverlayTrigger>
                     </p>
                     <p className="card-text">Room Color: {data.roomColor}</p>
-                    <p className="card-text">Room Light: {data.roomLight}</p>
-
-                    <p className="card-text">
-                      Product Color: {data.productColor}
-                    </p>
 
                     <p className="card-text">
                       <OverlayTrigger
@@ -295,6 +290,9 @@ function Header() {
                       >
                         <span>Room Tone: {data.tone}</span>
                       </OverlayTrigger>
+                    </p>
+                    <p className="card-text">
+                      Product Color: {data.productColor}
                     </p>
                     <p className="card-text">Product Angle: {data.angle}</p>
 
