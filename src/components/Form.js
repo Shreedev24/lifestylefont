@@ -4,18 +4,27 @@ import roomdata from "../roomdata.json";
 import Card from "react-bootstrap/Card";
 
 function Form() {
+  console.log("definitions",roomdata["productType"]["options"])
   const renderDropdownOptions = (key) => {
-    return roomdata[key].map((item, index) => (
-      <option key={index} value={item}>
-        {item}
-      </option>
-    ));
+    // Check if the key exists in roomdata and it is an array
+    if (roomdata.hasOwnProperty(key) && Array.isArray(roomdata[key]["options"])) {
+      // Map over the array and generate dropdown options
+      return roomdata[key]["options"].map((item, index) => (
+        <option key={index} value={item}>
+          {item}
+        </option>
+      ));
+    } else {
+      // Log an error if the key does not exist or it is not an array
+      console.error(`Invalid key or data for ${key}`);
+      return null; // or you can return default options as per your requirement
+    }
   };
 
   const [APIData, setAPIData] = useState([]);
   const [filteredResults, setFilteredResults] = useState([]);
   const [searchInput, setSearchInput] = useState("");
-  const [setroomType, setSelectedroomType] = useState([]);
+  const [setRoomType, setSelectedroomType] = useState([]);
   const [setProduct, setSelectedProduct] = useState([]);
   const [setProductColor, setSelectedProductColor] = useState([]);
   const [setRoomColor, setSelectedRoomColor] = useState([]);
@@ -35,10 +44,10 @@ function Form() {
   const handleclick = () => {
     const dataToSend = {
       image: setImage,
-      roomType: setroomType,
+      roomType: setRoomType,
       product: setProduct,
-      productcolor: setProductColor,
-      roomcolor: setRoomColor,
+      productColor: setProductColor,
+      roomColor: setRoomColor,
       angle: setAngle,
       roomLight: setRoomLight,
       tone: setTone,
@@ -76,7 +85,7 @@ function Form() {
             id="roomType"
             name="roomType"
             className="form-control"
-            value={setroomType}
+            value={setRoomType}
             onChange={(e) => setSelectedroomType(e.target.value)}
           >
             <option value="">Select Style</option>
@@ -94,7 +103,7 @@ function Form() {
             onChange={(e) => setSelectedProduct(e.target.value)}
           >
             <option value="">Select Product</option>
-            {renderDropdownOptions("product")}
+            {renderDropdownOptions("productType")}
           </select>
         </div>
 
@@ -108,7 +117,7 @@ function Form() {
             onChange={(e) => setSelectedProductColor(e.target.value)}
           >
             <option value="">Select Color</option>
-            {renderDropdownOptions("productcolor")}
+            {renderDropdownOptions("productColorType")}
           </select>
         </div>
 
@@ -122,7 +131,7 @@ function Form() {
             onChange={(e) => setSelectedRoomColor(e.target.value)}
           >
             <option value="">Select Color</option>
-            {renderDropdownOptions("roomcolor")}
+            {renderDropdownOptions("roomColorType")}
           </select>
         </div>
       </div>
@@ -138,7 +147,7 @@ function Form() {
             onChange={(e) => setSelectedAngle(e.target.value)}
           >
             <option value="">Select Angle</option>
-            {renderDropdownOptions("angle")}
+            {renderDropdownOptions("productAngle")}
           </select>
         </div>
 
@@ -166,7 +175,7 @@ function Form() {
             onChange={(e) => setSelectedTone(e.target.value)}
           >
             <option value="">Select tone</option>
-            {renderDropdownOptions("tone")}
+            {renderDropdownOptions("roomTone")}
           </select>
         </div>
       </div>

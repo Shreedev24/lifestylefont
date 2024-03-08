@@ -1,9 +1,56 @@
 {
-    "roomType": ["Modern", "Scandinavian", "Contemporary", "Eclectic", "Minimalist", "Rustic", "Asian", "Country", "Industrial", "Mediterranean", "Midcentury", "Retro", "Traditional", "Modern Maximalist", "Modern Farmhouse", "Coastal", "Boho"],
-    "product": ["Book shelf", "Side Table","Bedside","Chair","Sofas", "Beds", "Dining Table", "TV Unit", "Cabinet", "Shoe racks", "Wardrobe", "Coffee Tables", "Recliners", "Sideboards", "Desks", "Garden furniture", "Kids furniture", "Chest of drawers"],
-    "angle": ["Front", "Side", "Top", "Isometric", "Close-up", "Room view"],
-    "productcolor": ["Brown", "Cream", "White", "Grey", "Orange", "Golden", "Wooden", "Green", "yellow", "Black", "Blue"],
-    "roomcolor": ["Brown", "Cream", "White", "Grey", "Orange", "Golden", "Wooden", "Green", "yellow", "Black", "Blue"],
-    "roomLight": ["Bright", "Soft", "Dim", "Natural"],
-    "tone": ["Warm", "Cool", "Neutral", "Dark", "light"]
+    "roomType": {
+        "options": ["Modern", "Scandinavian", "Contemporary", "Eclectic", "Minimalist", "Rustic", "Asian", "Country", "Industrial", "Mediterranean", "Midcentury", "Retro", "Traditional", "Modern Maximalist", "Modern Farmhouse", "Coastal", "Boho"],
+        "definitions": {
+            "Modern": "Sleek lines, simple colors, and an uncluttered look.",
+            "Scandinavian": "Light and airy, with natural materials and minimalistic design.",
+            "Contemporary": "Reflects current trends with clean lines, smooth surfaces, and neutral colors.",
+            "Eclectic": "Mixes different styles, colors, textures, and patterns.",
+            "Minimalist": "Emphasizes simplicity and functionality with clean lines and open spaces.",
+            "Rustic": "Natural and earthy, featuring raw materials and unfinished elements.",
+            "Asian": "Balanced and harmonious, with clean lines and natural materials.",
+            "Country": "Warm and inviting, with natural materials and vintage elements.",
+            "Industrial": "Utilitarian and raw, with exposed materials and unfinished surfaces.",
+            "Mediterranean": "Warm and inviting, with earthy tones and textured surfaces.",
+            "Midcentury": "Clean lines, organic shapes, and a mix of traditional and modern elements.",
+            "Retro": "Inspired by styles from the past, with bold colors and geometric patterns.",
+            "Traditional": "Classic and timeless, with ornate details and rich colors.",
+            "Modern Maximalist": "Bold and eclectic, with vibrant colors and diverse patterns.",
+            "Modern Farmhouse": "Combines modern elements with rustic charm and cozy textures.",
+            "Coastal": "Light and breezy, with a color palette inspired by the sea and sky.",
+            "Boho": "Colorful and eclectic, with a mix of patterns, textures, and global influences."
+        }
+    },
+    "productType": {
+        "options": ["Book shelf", "Side Table","Bedside","Chair","Sofas", "Beds", "Dining Table", "TV Unit", "Cabinet", "Shoe racks", "Wardrobe", "Coffee Tables", "Recliners", "Sideboards", "Desks", "Garden furniture", "Kids furniture", "Chest of drawers"]
+    },
+    "productAngle": {
+        "options": ["Front", "Side", "Top", "Isometric", "Close-up", "Room view"]
+    },
+    "productColorType":{
+        "options":["Brown", "Cream", "White", "Grey", "Orange", "Golden", "Wooden", "Green", "yellow", "Black", "Blue"]
+    }, 
+    "roomColorType":{
+        "options": ["Brown", "Cream", "White", "Grey", "Orange", "Golden", "Wooden", "Green", "yellow", "Black", "Blue"]
+    },
+    
+    "roomLight": {
+        "options": ["Bright", "Soft", "Dim", "Natural"],
+        "definitions": {
+            "Bright": "Provides high illumination, suitable for work areas or task lighting.",
+            "Soft": "Gentle and diffused light that creates a cozy and inviting atmosphere.",
+            "Dim": "Subdued lighting, perfect for creating a relaxed and intimate ambiance.",
+            "Natural": "Light that comes from natural sources like sunlight, creating a warm and welcoming environment."
+        }
+    },
+    "roomTone": {
+        "options": ["Warm", "Cool", "Neutral", "Dark", "Light"],
+        "definitions": {
+            "Warm": "Colors that evoke feelings of warmth and coziness, like reds, oranges, and yellows.",
+            "Cool": "Colors that create a sense of calm and serenity, like blues, greens, and purples.",
+            "Neutral": "Colors that are versatile and easy to pair with other hues, like beige, gray, and white.",
+            "Dark": "Deep and rich colors that add drama and sophistication to a space, like navy blue, charcoal, and burgundy.",
+            "Light": "Soft and airy colors that make a space feel open and spacious, like pastel shades and whites."
+        }
+    }
 }
