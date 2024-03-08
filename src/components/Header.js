@@ -3,14 +3,25 @@ import axios from "axios";
 import roomdata from "../roomdata.json";
 import Card from "react-bootstrap/Card";
 import { Link } from "react-router-dom";
+import { OverlayTrigger, Tooltip } from "react-bootstrap";
+
 
 function Header() {
-  const renderDropdownOptions = (key) => {
-    return roomdata[key].map((item, index) => (
-      <option key={index} value={item}>
-        {item}
-      </option>
-    ));
+  console.log("definitions",roomdata["roomType"]["definitions"]["Asian"])
+  const renderDropdownOptions = (type,key) => {
+    // Check if the key exists in roomdata and it is an array
+    if (roomdata.hasOwnProperty(key) && Array.isArray(roomdata[key])) {
+      // Map over the array and generate dropdown options
+      return roomdata[type][key].map((item, index) => (
+        <option key={index} value={item}>
+          {item}
+        </option>
+      ));
+    } else {
+      // Log an error if the key does not exist or it is not an array
+      console.error(`Invalid key or data for ${key}`);
+      return null; // or you can return default options as per your requirement
+    }
   };
 
   const [APIData, setAPIData] = useState([]);
@@ -25,6 +36,30 @@ function Header() {
 
   var dataToSend = {};
 
+  const handleDelete = () => {
+    dataToSend = {
+      roomType: setRoomType,
+      product: setProduct,
+      productcolor: setProductColor,
+      roomcolor: setRoomColor,
+      angle: setAngle,
+      roomLight: setRoomLight,
+      tone: setTone,
+      searchBar: setSearchBar,
+    };
+
+    console.log(dataToSend);
+    axios
+      .post("https://data-7.onrender.com/api/lifestyle", dataToSend)
+      .then((response) => {
+        console.log("API response:", response.data);
+        setAPIData(response.data); // Update state with the received data
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  };
+  
   const listImages = () => {
     dataToSend = {
       roomType: setRoomType,
@@ -49,7 +84,7 @@ function Header() {
       });
   };
 
-  console.log("APIData", APIData.length);
+  console.log("APIDazta", APIData.length);
 
   useEffect(() => {
     // listImages();
@@ -65,6 +100,13 @@ function Header() {
       setAPIData(response.data);
     });
   }, []);
+
+  const renderTooltip = (type,text) => (
+    <Tooltip id="tooltip">
+      <strong>{roomdata[type]["definitions"][text]}</strong>
+    </Tooltip>
+  );
+
 
   return (
     <>
@@ -87,7 +129,7 @@ function Header() {
               onChange={(e) => setSelectedRoomType(e.target.value)}
             >
               <option value="">Select Type</option>
-              {renderDropdownOptions("roomType")}
+              {renderDropdownOptions("roomType","options")}
             </select>
           </div>
 
@@ -173,7 +215,7 @@ function Header() {
               onChange={(e) => setSelectedTone(e.target.value)}
             >
               <option value="">Select tone</option>
-              {renderDropdownOptions("tone")}
+              {renderDropdownOptions("roomTone")}
             </select>
           </div>
         </div>
@@ -229,12 +271,30 @@ function Header() {
                   />
                   <div className="card-body">
                     <h5 className="card-title">{data.product}</h5>
-                    <p className="card-text">Room Type: {data.roomType}</p>
+
+                    <p className="card-text">
+                      <OverlayTrigger placement="top" overlay={renderTooltip("roomType",data.roomType)}>
+                        <span>Room Type: {data.roomType}</span>
+                      </OverlayTrigger>
+                    </p>
+
                     <p className="card-text">Color: {data.color}</p>
-                    <p className="card-text">Room Light: {data.roomLight}</p>
+
+                    <p className="card-text">
+                      <OverlayTrigger placement="top" overlay={renderTooltip("roomLight",data.roomLight)}>
+                        <span>Room Light: {data.roomLight}</span>
+                      </OverlayTrigger>
+                    </p>
+
                     <p className="card-text">Angle: {data.angle}</p>
-                    <p className="card-text">Tone: {data.tone}</p>
-                    <Link to={`Edit/${data._id}`}>Edit</Link>
+                    <p className="card-text">
+                      <OverlayTrigger placement="top" overlay={renderTooltip("roomTone",data.tone)}>
+                        <span>Tone: {data.tone}</span>
+                      </OverlayTrigger>
+                    </p>
+                    <p className="card-text text-right">
+                    <Link to={`Edit/${data._id}`}>Edit</Link> <span className="px-2">|</span> <Link className="text-danger" onClick={handleDelete}>Delete</Link>
+                    </p>
                   </div>
                 </div>
               </div>
@@ -247,3 +307,5 @@ function Header() {
 }
 
 export default Header;
+
+
