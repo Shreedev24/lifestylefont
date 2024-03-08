@@ -1,14 +1,14 @@
 import React, { Component } from "react";
-import Form from "./Form";
+import EditForm from "./EditForm";
 
-class Add extends Component {
+class Edit extends Component {
   render() {
     return (
       <div>
-        <Form />
+        <EditForm />
       </div>
     );
   }
 }
 
-export default Add;
+export default Edit;

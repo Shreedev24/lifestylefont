@@ -16,7 +16,8 @@ function Header() {
   const [APIData, setAPIData] = useState([]);
   const [setRoomType, setSelectedRoomType] = useState("");
   const [setProduct, setSelectedProduct] = useState("");
-  const [setColor, setSelectedColor] = useState("");
+  const [setProductColor, setSelectedProductColor] = useState("");
+  const [setRoomColor, setSelectedRoomColor] = useState("");
   const [setAngle, setSelectedAngle] = useState("");
   const [setRoomLight, setSelectedRoomLight] = useState("");
   const [setTone, setSelectedTone] = useState("");
@@ -28,7 +29,8 @@ function Header() {
     dataToSend = {
       roomType: setRoomType,
       product: setProduct,
-      color: setColor,
+      productcolor: setProductColor,
+      roomcolor: setRoomColor,
       angle: setAngle,
       roomLight: setRoomLight,
       tone: setTone,
@@ -75,7 +77,7 @@ function Header() {
         </div>
 
         <div className="form-row align-items-end">
-          <div className="form-group col-md-4">
+          <div className="form-group col-md-3">
             <label htmlFor="roomType">Room Type</label>
             <select
               id="roomType"
@@ -89,7 +91,7 @@ function Header() {
             </select>
           </div>
 
-          <div className="form-group col-md-4">
+          <div className="form-group col-md-3">
             <label htmlFor="product">Product</label>
             <select
               id="product"
@@ -103,17 +105,31 @@ function Header() {
             </select>
           </div>
 
-          <div className="form-group col-md-4">
-            <label htmlFor="color">Color</label>
+          <div className="form-group col-md-3">
+            <label htmlFor="productcolor">Product Color</label>
             <select
-              id="color"
-              name="color"
+              id="productcolor"
+              name="productcolor"
               className="form-control"
-              value={setColor}
-              onChange={(e) => setSelectedColor(e.target.value)}
+              value={setProductColor}
+              onChange={(e) => setSelectedProductColor(e.target.value)}
             >
               <option value="">Select Color</option>
-              {renderDropdownOptions("color")}
+              {renderDropdownOptions("productcolor")}
+            </select>
+          </div>
+
+          <div className="form-group col-md-3">
+            <label htmlFor="roomcolor">Room Color</label>
+            <select
+              id="roomcolor"
+              name="roomcolor"
+              className="form-control"
+              value={setRoomColor}
+              onChange={(e) => setSelectedRoomColor(e.target.value)}
+            >
+              <option value="">Select Color</option>
+              {renderDropdownOptions("roomcolor")}
             </select>
           </div>
         </div>
@@ -218,6 +234,7 @@ function Header() {
                     <p className="card-text">Room Light: {data.roomLight}</p>
                     <p className="card-text">Angle: {data.angle}</p>
                     <p className="card-text">Tone: {data.tone}</p>
+                    <Link to={`Edit/${data._id}`}>Edit</Link>
                   </div>
                 </div>
               </div>

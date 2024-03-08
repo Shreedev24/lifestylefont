@@ -2,8 +2,10 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import roomdata from "../roomdata.json";
 import Card from "react-bootstrap/Card";
+import PropTypes from "prop-types";
 
-function Form() {
+function EditForm(id) {
+  console.log("eduit called", id);
   const renderDropdownOptions = (key) => {
     return roomdata[key].map((item, index) => (
       <option key={index} value={item}>
@@ -17,44 +19,40 @@ function Form() {
   const [searchInput, setSearchInput] = useState("");
   const [setroomType, setSelectedroomType] = useState([]);
   const [setProduct, setSelectedProduct] = useState([]);
-  const [setProductColor, setSelectedProductColor] = useState([]);
-  const [setRoomColor, setSelectedRoomColor] = useState([]);
+  const [setColor, setSelectedColor] = useState([]);
   const [setAngle, setSelectedAngle] = useState([]);
   const [setRoomLight, setSelectedRoomLight] = useState([]);
   const [setTone, setSelectedTone] = useState([]);
   const [setImage, setSelectedImage] = useState([]);
+  const [isEdit, setIsEdit] = useState(false);
 
-  // const handleclick = () => {
-  //     axios.post(`https://data-7.onrender.com/api/lifestyle`)
-  //     .then((response) => {
-  //       console.log("response",response)
-  //         setAPIData(response.data);
-  //     })
-  // }
-
-  const handleclick = () => {
+  const handleSave = () => {
     const dataToSend = {
       image: setImage,
       roomType: setroomType,
       product: setProduct,
-      productcolor: setProductColor,
-      roomcolor: setRoomColor,
+      color: setColor,
       angle: setAngle,
       roomLight: setRoomLight,
       tone: setTone,
     };
 
+    // Make a PUT request for edit
     axios
-      .post(`https://data-7.onrender.com/api/saveLifestyle`, dataToSend)
+      .put(`https://data-7.onrender.com/api/updateLifestyle/123`, dataToSend)
       .then((response) => {
-        console.log("response", response);
+        console.log("Edit response", response);
+        // Handle other logic if needed
+      })
+      .catch((error) => {
+        console.error("Edit Error:", error);
       });
   };
 
   return (
     <div className="container">
       <div className="text-center py-3">
-        <h1>Add New Room</h1>
+        <h1>Edit Room</h1>
       </div>
 
       <div className="form-row align-items-end">
@@ -99,30 +97,16 @@ function Form() {
         </div>
 
         <div className="form-group col-md-12">
-          <label htmlFor="productcolor">Product Color</label>
+          <label htmlFor="color">Color</label>
           <select
-            id="productcolor"
-            name="productcolor"
+            id="color"
+            name="color"
             className="form-control"
-            value={setProductColor}
-            onChange={(e) => setSelectedProductColor(e.target.value)}
+            value={setColor}
+            onChange={(e) => setSelectedColor(e.target.value)}
           >
             <option value="">Select Color</option>
-            {renderDropdownOptions("productcolor")}
-          </select>
-        </div>
-
-        <div className="form-group col-md-12">
-          <label htmlFor="roomcolor">Room Color</label>
-          <select
-            id="roomcolor"
-            name="roomcolor"
-            className="form-control"
-            value={setRoomColor}
-            onChange={(e) => setSelectedRoomColor(e.target.value)}
-          >
-            <option value="">Select Color</option>
-            {renderDropdownOptions("roomcolor")}
+            {renderDropdownOptions("color")}
           </select>
         </div>
       </div>
@@ -176,7 +160,7 @@ function Form() {
           <button
             type="submit"
             className="btn btn-primary btn-block"
-            onClick={handleclick}
+            onClick={handleSave}
           >
             Save Room
           </button>
@@ -186,4 +170,4 @@ function Form() {
   );
 }
 
-export default Form;
+export default EditForm;
