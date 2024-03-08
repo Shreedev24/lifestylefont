@@ -129,7 +129,49 @@ function Header() {
           </div>
 
           <div className="form-group col-md-3">
-            <label htmlFor="product">Product</label>
+            <label htmlFor="tone">Room Tone</label>
+            <select
+              id="tone"
+              name="tone"
+              className="form-control"
+              value={setTone}
+              onChange={(e) => setSelectedTone(e.target.value)}
+            >
+              <option value="">Select tone</option>
+              {renderDropdownOptions("roomTone")}
+            </select>
+          </div>
+
+          <div className="form-group col-md-3">
+            <label htmlFor="roomColor">Room Color</label>
+            <select
+              id="roomColor"
+              name="roomColor"
+              className="form-control"
+              value={setRoomColor}
+              onChange={(e) => setSelectedRoomColor(e.target.value)}
+            >
+              <option value="">Select Color</option>
+              {renderDropdownOptions("roomColorType")}
+            </select>
+          </div>
+
+          <div className="form-group col-md-3">
+            <label htmlFor="roomLight">Room Light</label>
+            <select
+              id="roomLight"
+              name="roomLight"
+              className="form-control"
+              value={setRoomLight}
+              onChange={(e) => setSelectedRoomLight(e.target.value)}
+            >
+              <option value="">Select room light</option>
+              {renderDropdownOptions("roomLight")}
+            </select>
+          </div>
+
+          <div className="form-group col-md-3">
+            <label htmlFor="product">Product Type</label>
             <select
               id="product"
               name="product"
@@ -157,23 +199,7 @@ function Header() {
           </div>
 
           <div className="form-group col-md-3">
-            <label htmlFor="roomColor">Room Color</label>
-            <select
-              id="roomColor"
-              name="roomColor"
-              className="form-control"
-              value={setRoomColor}
-              onChange={(e) => setSelectedRoomColor(e.target.value)}
-            >
-              <option value="">Select Color</option>
-              {renderDropdownOptions("roomColorType")}
-            </select>
-          </div>
-        </div>
-
-        <div className="form-row align-items-end">
-          <div className="form-group col-md-4">
-            <label htmlFor="angle">Angle</label>
+            <label htmlFor="angle">Product Angle</label>
             <select
               id="angle"
               name="angle"
@@ -183,34 +209,6 @@ function Header() {
             >
               <option value="">Select angle</option>
               {renderDropdownOptions("productAngle")}
-            </select>
-          </div>
-
-          <div className="form-group col-md-4">
-            <label htmlFor="roomLight">Room light</label>
-            <select
-              id="roomLight"
-              name="roomLight"
-              className="form-control"
-              value={setRoomLight}
-              onChange={(e) => setSelectedRoomLight(e.target.value)}
-            >
-              <option value="">Select room light</option>
-              {renderDropdownOptions("roomLight")}
-            </select>
-          </div>
-
-          <div className="form-group col-md-4">
-            <label htmlFor="tone">Tone</label>
-            <select
-              id="tone"
-              name="tone"
-              className="form-control"
-              value={setTone}
-              onChange={(e) => setSelectedTone(e.target.value)}
-            >
-              <option value="">Select tone</option>
-              {renderDropdownOptions("roomTone")}
             </select>
           </div>
         </div>
