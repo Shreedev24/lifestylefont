@@ -60,11 +60,11 @@ function Header() {
     listImages();
   };
 
-  useEffect(() => {
-    axios.get(`https://jsonplaceholder.typicode.com/users`).then((response) => {
-      setAPIData(response.data);
-    });
-  }, []);
+  // useEffect(() => {
+  //   axios.get(`https://jsonplaceholder.typicode.com/users`).then((response) => {
+  //     setAPIData(response.data);
+  //   });
+  // }, []);
 
   return (
     <>
