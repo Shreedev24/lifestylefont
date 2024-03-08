@@ -7,12 +7,12 @@ import { OverlayTrigger, Tooltip } from "react-bootstrap";
 
 
 function Header() {
-  console.log("definitions",roomdata["roomType"]["definitions"]["Asian"])
-  const renderDropdownOptions = (type,key) => {
+  console.log("definitions",roomdata["productType"]["options"])
+  const renderDropdownOptions = (key) => {
     // Check if the key exists in roomdata and it is an array
-    if (roomdata.hasOwnProperty(key) && Array.isArray(roomdata[key])) {
+    if (roomdata.hasOwnProperty(key) && Array.isArray(roomdata[key]["options"])) {
       // Map over the array and generate dropdown options
-      return roomdata[type][key].map((item, index) => (
+      return roomdata[key]["options"].map((item, index) => (
         <option key={index} value={item}>
           {item}
         </option>
@@ -40,8 +40,8 @@ function Header() {
     dataToSend = {
       roomType: setRoomType,
       product: setProduct,
-      productcolor: setProductColor,
-      roomcolor: setRoomColor,
+      productColor: setProductColor,
+      roomColor: setRoomColor,
       angle: setAngle,
       roomLight: setRoomLight,
       tone: setTone,
@@ -64,8 +64,8 @@ function Header() {
     dataToSend = {
       roomType: setRoomType,
       product: setProduct,
-      productcolor: setProductColor,
-      roomcolor: setRoomColor,
+      productColor: setProductColor,
+      roomColor: setRoomColor,
       angle: setAngle,
       roomLight: setRoomLight,
       tone: setTone,
@@ -95,13 +95,7 @@ function Header() {
     listImages();
   };
 
-  useEffect(() => {
-    axios.get(`https://jsonplaceholder.typicode.com/users`).then((response) => {
-      setAPIData(response.data);
-    });
-  }, []);
-
-  const renderTooltip = (type,text) => (
+   const renderTooltip = (type,text) => (
     <Tooltip id="tooltip">
       <strong>{roomdata[type]["definitions"][text]}</strong>
     </Tooltip>
@@ -129,7 +123,7 @@ function Header() {
               onChange={(e) => setSelectedRoomType(e.target.value)}
             >
               <option value="">Select Type</option>
-              {renderDropdownOptions("roomType","options")}
+              {renderDropdownOptions("roomType")}
             </select>
           </div>
 
@@ -143,35 +137,35 @@ function Header() {
               onChange={(e) => setSelectedProduct(e.target.value)}
             >
               <option value="">Select Product</option>
-              {renderDropdownOptions("product")}
+              {renderDropdownOptions("productType")}
             </select>
           </div>
 
           <div className="form-group col-md-3">
-            <label htmlFor="productcolor">Product Color</label>
+            <label htmlFor="productColor">Product Color</label>
             <select
-              id="productcolor"
-              name="productcolor"
+              id="productColor"
+              name="productColor"
               className="form-control"
               value={setProductColor}
               onChange={(e) => setSelectedProductColor(e.target.value)}
             >
               <option value="">Select Color</option>
-              {renderDropdownOptions("productcolor")}
+              {renderDropdownOptions("productColorType")}
             </select>
           </div>
 
           <div className="form-group col-md-3">
-            <label htmlFor="roomcolor">Room Color</label>
+            <label htmlFor="roomColor">Room Color</label>
             <select
-              id="roomcolor"
-              name="roomcolor"
+              id="roomColor"
+              name="roomColor"
               className="form-control"
               value={setRoomColor}
               onChange={(e) => setSelectedRoomColor(e.target.value)}
             >
               <option value="">Select Color</option>
-              {renderDropdownOptions("roomcolor")}
+              {renderDropdownOptions("roomColorType")}
             </select>
           </div>
         </div>
@@ -187,7 +181,7 @@ function Header() {
               onChange={(e) => setSelectedAngle(e.target.value)}
             >
               <option value="">Select angle</option>
-              {renderDropdownOptions("angle")}
+              {renderDropdownOptions("productAngle")}
             </select>
           </div>
 
@@ -277,8 +271,10 @@ function Header() {
                         <span>Room Type: {data.roomType}</span>
                       </OverlayTrigger>
                     </p>
+                    <p className="card-text">Room Color: {data.roomColor}</p>
+                    <p className="card-text">Room Light: {data.roomLight}</p>
 
-                    <p className="card-text">Color: {data.color}</p>
+                    <p className="card-text">Product Color: {data.productColor}</p>
 
                     <p className="card-text">
                       <OverlayTrigger placement="top" overlay={renderTooltip("roomLight",data.roomLight)}>
