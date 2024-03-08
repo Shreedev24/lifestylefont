@@ -6,7 +6,6 @@ import { Link } from "react-router-dom";
 import { OverlayTrigger, Tooltip } from "react-bootstrap";
 
 function Header() {
-  console.log("definitions", roomdata["productType"]["options"]);
   const renderDropdownOptions = (key) => {
     // Check if the key exists in roomdata and it is an array
     if (
@@ -35,6 +34,8 @@ function Header() {
   const [setRoomLight, setSelectedRoomLight] = useState("");
   const [setTone, setSelectedTone] = useState("");
   const [setSearchBar, setSelectedSearchBar] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [isSearchBtnClick, setSearchBtnClick] = useState(false);
 
   var dataToSend = {};
 
@@ -62,7 +63,7 @@ function Header() {
       });
   };
 
-  const listImages = () => {
+  useEffect(() => {
     dataToSend = {
       roomType: setRoomType,
       product: setProduct,
@@ -74,27 +75,23 @@ function Header() {
       searchBar: setSearchBar,
     };
 
-    console.log(dataToSend);
+    setIsLoading(true);
     axios
       .post("https://data-7.onrender.com/api/lifestyle", dataToSend)
       .then((response) => {
         console.log("API response:", response.data);
         setAPIData(response.data); // Update state with the received data
+        setIsLoading(false);
       })
       .catch((error) => {
         console.error("Error:", error);
+        setIsLoading(false);
       });
-  };
+  }, [isSearchBtnClick]);
 
-  console.log("APIDazta", APIData.length);
-
-  useEffect(() => {
-    // listImages();
-  }, [dataToSend]);
-
-  if (!APIData.length) listImages();
-  const handleclick = () => {
-    listImages();
+  const btnSearchClick = () => {
+    if (isSearchBtnClick) setSearchBtnClick(false);
+    else setSearchBtnClick(true);
   };
 
   const renderTooltip = (type, text) => (
@@ -232,7 +229,7 @@ function Header() {
             <button
               type="submit"
               className="btn btn-primary btn-block"
-              onClick={handleclick}
+              onClick={(e) => btnSearchClick()}
             >
               Search
             </button>
@@ -246,68 +243,76 @@ function Header() {
             <hr />
           </div>
         </div>
-        <div className="row">
-          <div className="col-md-12 py-3">
-            <div className="pl-3">Results: {APIData.length}</div>
-          </div>
-        </div>
-
-        <div className="row">
-          {APIData &&
-            APIData.map((data, index) => (
-              <div key={index} className="col-md-4 mb-3">
-                <div className="card">
-                  <img
-                    src={`https://backendlifestyle.netlify.app/images/${data.image}`}
-                    alt={`Image ${index + 1}`}
-                    className="card-img-top img-fluid"
-                  />
-                  <div className="card-body">
-                    <h5 className="card-title">{data.product}</h5>
-
-                    <p className="card-text">
-                      <OverlayTrigger
-                        placement="top"
-                        overlay={renderTooltip("roomType", data.roomType)}
-                      >
-                        <span>Room Type: {data.roomType}</span>
-                      </OverlayTrigger>
-                    </p>
-                    <p className="card-text">Room Color: {data.roomColor}</p>
-
-                    <p className="card-text">
-                      <OverlayTrigger
-                        placement="top"
-                        overlay={renderTooltip("roomLight", data.roomLight)}
-                      >
-                        <span>Room Light: {data.roomLight}</span>
-                      </OverlayTrigger>
-                    </p>
-                    <p className="card-text">
-                      <OverlayTrigger
-                        placement="top"
-                        overlay={renderTooltip("roomTone", data.tone)}
-                      >
-                        <span>Room Tone: {data.tone}</span>
-                      </OverlayTrigger>
-                    </p>
-                    <p className="card-text">
-                      Product Color: {data.productColor}
-                    </p>
-                    <p className="card-text">Product Angle: {data.angle}</p>
-
-                    <p className="card-text text-right">
-                      <Link to={`Edit/${data._id}`}>Edit</Link>{" "}
-                      <span className="px-2">|</span>{" "}
-                      <Link className="text-danger" onClick={handleDelete}>
-                        Delete
-                      </Link>
-                    </p>
-                  </div>
-                </div>
+        {isLoading ? (
+          <p>Loading...</p>
+        ) : (
+          <>
+            <div className="row">
+              <div className="col-md-12 py-3">
+                <div className="pl-3">Results: {APIData.length}</div>
               </div>
-            ))}
-        </div>
+            </div>
+
+            <div className="row">
+              {APIData &&
+                APIData.map((data, index) => (
+                  <div key={index} className="col-md-4 mb-3">
+                    <div className="card">
+                      <img
+                        src={`https://backendlifestyle.netlify.app/images/${data.image}`}
+                        alt={`Image ${index + 1}`}
+                        className="card-img-top img-fluid"
+                      />
+                      <div className="card-body">
+                        <h5 className="card-title">{data.product}</h5>
+
+                        <p className="card-text">
+                          <OverlayTrigger
+                            placement="top"
+                            overlay={renderTooltip("roomType", data.roomType)}
+                          >
+                            <span>Room Type: {data.roomType}</span>
+                          </OverlayTrigger>
+                        </p>
+                        <p className="card-text">
+                          Room Color: {data.roomColor}
+                        </p>
+
+                        <p className="card-text">
+                          <OverlayTrigger
+                            placement="top"
+                            overlay={renderTooltip("roomLight", data.roomLight)}
+                          >
+                            <span>Room Light: {data.roomLight}</span>
+                          </OverlayTrigger>
+                        </p>
+                        <p className="card-text">
+                          <OverlayTrigger
+                            placement="top"
+                            overlay={renderTooltip("roomTone", data.tone)}
+                          >
+                            <span>Room Tone: {data.tone}</span>
+                          </OverlayTrigger>
+                        </p>
+                        <p className="card-text">
+                          Product Color: {data.productColor}
+                        </p>
+                        <p className="card-text">Product Angle: {data.angle}</p>
+
+                        <p className="card-text text-right">
+                          <Link to={`Edit/${data._id}`}>Edit</Link>{" "}
+                          <span className="px-2">|</span>{" "}
+                          <Link className="text-danger" onClick={handleDelete}>
+                            Delete
+                          </Link>
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+            </div>
+          </>
+        )}
       </div>
       {/* <ImageGrid APIData={APIData} /> */}
     </>
