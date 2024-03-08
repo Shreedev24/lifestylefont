@@ -1,22 +1,35 @@
 import React, { useState, useEffect } from "react";
+import { useParams } from "react-router";
 import axios from "axios";
 import roomdata from "../roomdata.json";
 import Card from "react-bootstrap/Card";
 import PropTypes from "prop-types";
 
-function EditForm(id) {
+function EditForm() {
+  let { id } = useParams();
   console.log("eduit called", id);
+
   const renderDropdownOptions = (key) => {
-    return roomdata[key].map((item, index) => (
-      <option key={index} value={item}>
-        {item}
-      </option>
-    ));
+    // Check if the key exists in roomdata and it is an array
+    if (
+      roomdata.hasOwnProperty(key) &&
+      Array.isArray(roomdata[key]["options"])
+    ) {
+      // Map over the array and generate dropdown options
+      return roomdata[key]["options"].map((item, index) => (
+        <option key={index} value={item}>
+          {item}
+        </option>
+      ));
+    } else {
+      // Log an error if the key does not exist or it is not an array
+      console.error(`Invalid key or data for ${key}`);
+      return null; // or you can return default options as per your requirement
+    }
   };
 
-  const [APIData, setAPIData] = useState([]);
+  //const [APIData, setAPIData] = useState([]);
   const [filteredResults, setFilteredResults] = useState([]);
-  const [searchInput, setSearchInput] = useState("");
   const [setroomType, setSelectedroomType] = useState([]);
   const [setProduct, setSelectedProduct] = useState([]);
   const [setColor, setSelectedColor] = useState([]);
@@ -25,6 +38,20 @@ function EditForm(id) {
   const [setTone, setSelectedTone] = useState([]);
   const [setImage, setSelectedImage] = useState([]);
   const [isEdit, setIsEdit] = useState(false);
+
+  useEffect(() => {
+    setSelectedImage("arpit");
+    axios
+      .get("https://data-7.onrender.com/api/getLifestyle/" + id)
+      .then((res) => {
+        console.log("API response:", res.data);
+        setSelectedImage(res.data["image"]);
+        //setAPIData(res.data); // Update state with the received data
+      })
+      .catch((error) => {
+        console.error("123 Error:", setImage);
+      });
+  }, []);
 
   const handleSave = () => {
     const dataToSend = {
@@ -39,7 +66,7 @@ function EditForm(id) {
 
     // Make a PUT request for edit
     axios
-      .put(`https://data-7.onrender.com/api/updateLifestyle/123`, dataToSend)
+      .put(`https://data-7.onrender.com/api/updateLifestyle/` + id, dataToSend)
       .then((response) => {
         console.log("Edit response", response);
         // Handle other logic if needed
@@ -64,6 +91,7 @@ function EditForm(id) {
             name="image"
             className="form-control"
             placeholder="Enter Image"
+            value={setImage}
             onChange={(e) => setSelectedImage(e.target.value)}
           />
         </div>
@@ -92,7 +120,7 @@ function EditForm(id) {
             onChange={(e) => setSelectedProduct(e.target.value)}
           >
             <option value="">Select Product</option>
-            {renderDropdownOptions("product")}
+            {renderDropdownOptions("productType")}
           </select>
         </div>
 
@@ -106,7 +134,7 @@ function EditForm(id) {
             onChange={(e) => setSelectedColor(e.target.value)}
           >
             <option value="">Select Color</option>
-            {renderDropdownOptions("color")}
+            {renderDropdownOptions("productColorType")}
           </select>
         </div>
       </div>
@@ -122,7 +150,7 @@ function EditForm(id) {
             onChange={(e) => setSelectedAngle(e.target.value)}
           >
             <option value="">Select Angle</option>
-            {renderDropdownOptions("angle")}
+            {renderDropdownOptions("productAngle")}
           </select>
         </div>
 
@@ -150,7 +178,7 @@ function EditForm(id) {
             onChange={(e) => setSelectedTone(e.target.value)}
           >
             <option value="">Select tone</option>
-            {renderDropdownOptions("tone")}
+            {renderDropdownOptions("roomTone")}
           </select>
         </div>
       </div>
