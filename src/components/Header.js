@@ -39,28 +39,23 @@ function Header() {
 
   var dataToSend = {};
 
-  const handleDelete = () => {
-    dataToSend = {
-      roomType: setRoomType,
-      product: setProduct,
-      productColor: setProductColor,
-      roomColor: setRoomColor,
-      angle: setAngle,
-      roomLight: setRoomLight,
-      tone: setTone,
-      searchBar: setSearchBar,
-    };
+  const handleDelete = (id) => {
+    const isConfirmed = window.confirm(
+      "Are you sure you want to delete this item?"
+    );
 
-    console.log(dataToSend);
-    axios
-      .post("https://data-7.onrender.com/api/lifestyle", dataToSend)
-      .then((response) => {
-        console.log("API response:", response.data);
-        setAPIData(response.data); // Update state with the received data
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-      });
+    if (isConfirmed) {
+      axios
+        .delete(`https://data-7.onrender.com/api/deleteLifestyle/${id}`)
+        .then((response) => {
+          console.log("Delete response:", response.data);
+
+          btnSearchClick();
+        })
+        .catch((error) => {
+          console.error("Delete Error:", error);
+        });
+    }
   };
 
   useEffect(() => {
@@ -302,7 +297,10 @@ function Header() {
                         <p className="card-text text-right">
                           <Link to={`Edit/${data._id}`}>Edit</Link>{" "}
                           <span className="px-2">|</span>{" "}
-                          <Link className="text-danger" onClick={handleDelete}>
+                          <Link
+                            className="text-danger"
+                            onClick={() => handleDelete(data._id)}
+                          >
                             Delete
                           </Link>
                         </p>
