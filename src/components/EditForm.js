@@ -1,75 +1,362 @@
+// import React, { useState, useEffect } from "react";
+// import { useParams } from "react-router";
+// import axios from "axios";
+// import roomdata from "../roomdata.json";
+// import Card from "react-bootstrap/Card";
+// import PropTypes from "prop-types";
+
+// function EditForm() {
+//   let { id } = useParams();
+//   console.log("eduit called", id);
+
+//   const renderDropdownOptions = (key) => {
+//     // Check if the key exists in roomdata and it is an array
+//     if (
+//       roomdata.hasOwnProperty(key) &&
+//       Array.isArray(roomdata[key]["options"])
+//     ) {
+//       // Map over the array and generate dropdown options
+//       return roomdata[key]["options"].map((item, index) => (
+//         <option key={index} value={item}>
+//           {item}
+//         </option>
+//       ));
+//     } else {
+//       // Log an error if the key does not exist or it is not an array
+//       console.error(`Invalid key or data for ${key}`);
+//       return null; // or you can return default options as per your requirement
+//     }
+//   };
+
+//   const [APIData, setAPIData] = useState([]);
+//   const [setRoomType, setSelectedRoomType] = useState("");
+//   const [setProduct, setSelectedProduct] = useState("");
+//   const [setProductColor, setSelectedProductColor] = useState("");
+//   const [setRoomColor, setSelectedRoomColor] = useState("");
+//   const [setAngle, setSelectedAngle] = useState("");
+//   const [setRoomLight, setSelectedRoomLight] = useState("");
+//   const [setTone, setSelectedTone] = useState("");
+//   const [setImage, setSelectedImage] = useState("");
+//   const [isEdit, setIsEdit] = useState(false);
+//   // const [image, setImage] = useState("");
+//   // const [roomType, setRoomType] = useState("");
+//   // const [product, setProduct] = useState("");
+//   // const [color, setColor] = useState("");
+//   // const [angle, setAngle] = useState("");
+//   // const [roomLight, setRoomLight] = useState("");
+//   // const [tone, setTone] = useState("");
+
+//   useEffect(() => {
+//     axios
+//       .get("https://data-7.onrender.com/api/getLifestyle/" + id)
+//       .then((res) => {
+//         console.log("API response:", res.data);
+//         setImage(data.image);
+//         setRoomType(data.roomType);
+//         setProduct(data.product);
+//         setProductColor(data.productColor);
+//         setRoomColor(data.roomColor);
+//         setAngle(data.angle);
+//         setRoomLight(data.roomLight);
+//         setTone(data.tone);
+//         setSelectedImage(res.data["image"]);
+//         setAPIData(res.data); // Update state with the received data
+//       })
+//       .catch((error) => {
+//         console.error("123 Error:", setImage);
+//       });
+//   }, [id]);
+
+//   const handleSave = () => {
+//     const dataToSend = {
+//       image: setImage,
+//       roomType: setRoomType,
+//       product: setProduct,
+//       productColor: setProductColor,
+//       roomcolor: setRoomColor,
+//       angle: setAngle,
+//       roomLight: setRoomLight,
+//       tone: setTone,
+//     };
+//     // const [image, setImage] = useState("");
+//     // const [roomType, setRoomType] = useState("");
+//     // const [product, setProduct] = useState("");
+//     // const [color, setColor] = useState("");
+//     // const [angle, setAngle] = useState("");
+//     // const [roomLight, setRoomLight] = useState("");
+//     // const [tone, setTone] = useState("");
+
+//     // useEffect(() => {
+//     //   axios
+//     //     .get("https://data-7.onrender.com/api/getLifestyle/" + id)
+//     //     .then((res) => {
+//     //       const data = res.data;
+//     //       setImage(data.image);
+//     //       setRoomType(data.roomType);
+//     //       setProduct(data.product);
+//     //       setColor(data.color);
+//     //       setAngle(data.angle);
+//     //       setRoomLight(data.roomLight);
+//     //       setTone(data.tone);
+//     //     })
+//     //     .catch((error) => {
+//     //       console.error("Error fetching data:", error);
+//     //     });
+//     // }, [id]);
+
+//     // const handleSave = () => {
+//     //   const dataToSend = {
+//     //     image,
+//     //     roomType,
+//     //     product,
+//     //     color,
+//     //     angle,
+//     //     roomLight,
+//     //     tone,
+//     //   };
+
+//     // Make a PUT request for edit
+//     axios
+//       .put(`https://data-7.onrender.com/api/updateLifestyle/` + id, dataToSend)
+//       .then((response) => {
+//         console.log("Edit response", response);
+//         // Handle other logic if needed
+//       })
+//       .catch((error) => {
+//         console.error("Edit Error:", error);
+//       });
+//   };
+
+//   return (
+//     <div className="container">
+//       <div className="text-center py-3">
+//         <h1>Edit Room</h1>
+//       </div>
+
+//       <div className="form-row align-items-end">
+//         <div className="form-group col-md-12">
+//           <label htmlFor="image">Image</label>
+//           <input
+//             type="text"
+//             id="image"
+//             name="image"
+//             className="form-control"
+//             placeholder="Enter Image"
+//             value={setImage}
+//             onChange={(e) => setSelectedImage(e.target.value)}
+//           />
+//         </div>
+
+//         <div className="form-group col-md-12">
+//           <label htmlFor="roomType">Room style</label>
+//           <select
+//             id="roomType"
+//             name="roomType"
+//             className="form-control"
+//             value={setRoomType}
+//             onChange={(e) => setSelectedRoomType(e.target.value)}
+//           >
+//             <option value="">Select Style</option>
+//             {renderDropdownOptions("roomType")}
+//           </select>
+//         </div>
+
+//         <div className="form-group col-md-12">
+//           <label htmlFor="product">Product</label>
+//           <select
+//             id="product"
+//             name="product"
+//             className="form-control"
+//             value={setProduct}
+//             onChange={(e) => setSelectedProduct(e.target.value)}
+//           >
+//             <option value="">Select Product</option>
+//             {renderDropdownOptions("productType")}
+//           </select>
+//         </div>
+
+//         <div className="form-group col-md-12">
+//           <label htmlFor="productcolor">Product Color</label>
+//           <select
+//             id="productcolor"
+//             name="productcolor"
+//             className="form-control"
+//             value={setProductColor}
+//             onChange={(e) => setSelectedProductColor(e.target.value)}
+//           >
+//             <option value="">Select Color</option>
+//             {renderDropdownOptions("productColorType")}
+//           </select>
+//         </div>
+
+//         <div className="form-group col-md-12">
+//           <label htmlFor="roomcolor">Room Color</label>
+//           <select
+//             id="roomcolor"
+//             name="roomcolor"
+//             className="form-control"
+//             value={setRoomColor}
+//             onChange={(e) => setSelectedRoomColor(e.target.value)}
+//           >
+//             <option value="">Select Color</option>
+//             {renderDropdownOptions("roomColorType")}
+//           </select>
+//         </div>
+//       </div>
+
+//       <div className="form-row align-items-end">
+//         <div className="form-group col-md-12">
+//           <label htmlFor="angle">Angle</label>
+//           <select
+//             id="angle"
+//             name="angle"
+//             className="form-control"
+//             value={setAngle}
+//             onChange={(e) => setSelectedAngle(e.target.value)}
+//           >
+//             <option value="">Select Angle</option>
+//             {renderDropdownOptions("productAngle")}
+//           </select>
+//         </div>
+
+//         <div className="form-group col-md-12">
+//           <label htmlFor="roomLight">Room light</label>
+//           <select
+//             id="roomLight"
+//             name="roomLight"
+//             className="form-control"
+//             value={setRoomLight}
+//             onChange={(e) => setSelectedRoomLight(e.target.value)}
+//           >
+//             <option value="">Select Room Light</option>
+//             {renderDropdownOptions("roomLight")}
+//           </select>
+//         </div>
+
+//         <div className="form-group col-md-12">
+//           <label htmlFor="tone">Tone</label>
+//           <select
+//             id="tone"
+//             name="tone"
+//             className="form-control"
+//             value={setTone}
+//             onChange={(e) => setSelectedTone(e.target.value)}
+//           >
+//             <option value="">Select tone</option>
+//             {renderDropdownOptions("roomTone")}
+//           </select>
+//         </div>
+//       </div>
+
+//       <div className="form-row align-items-end">
+//         <div className="form-group col-md-12">
+//           <button
+//             type="submit"
+//             className="btn btn-primary btn-block"
+//             onClick={handleSave}
+//           >
+//             Save Room
+//           </button>
+//         </div>
+//       </div>
+//     </div>
+//   );
+// }
+
+// export default EditForm;
+
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router";
 import axios from "axios";
 import roomdata from "../roomdata.json";
-import Card from "react-bootstrap/Card";
-import PropTypes from "prop-types";
 
 function EditForm() {
   let { id } = useParams();
-  console.log("eduit called", id);
 
   const renderDropdownOptions = (key) => {
-    // Check if the key exists in roomdata and it is an array
     if (
       roomdata.hasOwnProperty(key) &&
       Array.isArray(roomdata[key]["options"])
     ) {
-      // Map over the array and generate dropdown options
       return roomdata[key]["options"].map((item, index) => (
         <option key={index} value={item}>
           {item}
         </option>
       ));
     } else {
-      // Log an error if the key does not exist or it is not an array
       console.error(`Invalid key or data for ${key}`);
-      return null; // or you can return default options as per your requirement
+      return null;
     }
   };
 
-  //const [APIData, setAPIData] = useState([]);
-  const [filteredResults, setFilteredResults] = useState([]);
-  const [setroomType, setSelectedroomType] = useState([]);
-  const [setProduct, setSelectedProduct] = useState([]);
-  const [setColor, setSelectedColor] = useState([]);
-  const [setAngle, setSelectedAngle] = useState([]);
-  const [setRoomLight, setSelectedRoomLight] = useState([]);
-  const [setTone, setSelectedTone] = useState([]);
-  const [setImage, setSelectedImage] = useState([]);
+  const [APIData, setAPIData] = useState({});
+  const [selectedRoomType, setSelectedRoomType] = useState("");
+  const [selectedProduct, setSelectedProduct] = useState("");
+  const [selectedProductColor, setSelectedProductColor] = useState("");
+  const [selectedRoomColor, setSelectedRoomColor] = useState("");
+  const [selectedAngle, setSelectedAngle] = useState("");
+  const [selectedRoomLight, setSelectedRoomLight] = useState("");
+  const [selectedTone, setSelectedTone] = useState("");
+  const [selectedImage, setSelectedImage] = useState("");
   const [isEdit, setIsEdit] = useState(false);
 
+  // useEffect(() => {
+  //   axios
+  //     .get("https://data-7.onrender.com/api/allLifestyles/" + id)
+  //     .then((res) => {
+  //       const data = res.data;
+  //       setSelectedImage(data.image);
+  //       setSelectedRoomType(data.roomType);
+  //       setSelectedProduct(data.product);
+  //       setSelectedProductColor(data.productColor);
+  //       setSelectedRoomColor(data.roomColor);
+  //       setSelectedAngle(data.angle);
+  //       setSelectedRoomLight(data.roomLight);
+  //       setSelectedTone(data.tone);
+  //       setAPIData(data);
+  //     })
+  //     .catch((error) => {
+  //       console.error("Error fetching data:", error);
+  //     });
+  // }, [id]);
+
   useEffect(() => {
-    setSelectedImage("arpit");
     axios
-      .get("https://data-7.onrender.com/api/getLifestyle/" + id)
+      .get(`https://data-7.onrender.com/api/getLifestyle/${id}`)
       .then((res) => {
-        console.log("API response:", res.data);
-        setSelectedImage(res.data["image"]);
-        //setAPIData(res.data); // Update state with the received data
+        const data = res.data;
+        console.log(data.image);
+        setSelectedImage(data.image);
+        setSelectedRoomType(data.roomType);
+        setSelectedProduct(data.product);
+        setSelectedProductColor(data.productColor);
+        setSelectedRoomColor(data.roomColor);
+        setSelectedAngle(data.angle);
+        setSelectedRoomLight(data.roomLight);
+        setSelectedTone(data.tone);
+        setAPIData(data); // Update state with the received data
       })
       .catch((error) => {
-        console.error("123 Error:", setImage);
+        console.error("Error fetching data:", error);
       });
-  }, []);
+  }, [id]);
 
   const handleSave = () => {
     const dataToSend = {
-      image: setImage,
-      roomType: setroomType,
-      product: setProduct,
-      color: setColor,
-      angle: setAngle,
-      roomLight: setRoomLight,
-      tone: setTone,
+      image: selectedImage,
+      roomType: selectedRoomType,
+      product: selectedProduct,
+      productColor: selectedProductColor,
+      roomcolor: selectedRoomColor,
+      angle: selectedAngle,
+      roomLight: selectedRoomLight,
+      tone: selectedTone,
     };
 
-    // Make a PUT request for edit
     axios
       .put(`https://data-7.onrender.com/api/updateLifestyle/` + id, dataToSend)
       .then((response) => {
         console.log("Edit response", response);
-        // Handle other logic if needed
       })
       .catch((error) => {
         console.error("Edit Error:", error);
@@ -91,7 +378,7 @@ function EditForm() {
             name="image"
             className="form-control"
             placeholder="Enter Image"
-            value={setImage}
+            value={selectedImage}
             onChange={(e) => setSelectedImage(e.target.value)}
           />
         </div>
@@ -102,8 +389,8 @@ function EditForm() {
             id="roomType"
             name="roomType"
             className="form-control"
-            value={setroomType}
-            onChange={(e) => setSelectedroomType(e.target.value)}
+            value={selectedRoomType}
+            onChange={(e) => setSelectedRoomType(e.target.value)}
           >
             <option value="">Select Style</option>
             {renderDropdownOptions("roomType")}
@@ -116,7 +403,7 @@ function EditForm() {
             id="product"
             name="product"
             className="form-control"
-            value={setProduct}
+            value={selectedProduct}
             onChange={(e) => setSelectedProduct(e.target.value)}
           >
             <option value="">Select Product</option>
@@ -125,16 +412,30 @@ function EditForm() {
         </div>
 
         <div className="form-group col-md-12">
-          <label htmlFor="color">Color</label>
+          <label htmlFor="productcolor">Product Color</label>
           <select
-            id="color"
-            name="color"
+            id="productcolor"
+            name="productcolor"
             className="form-control"
-            value={setColor}
-            onChange={(e) => setSelectedColor(e.target.value)}
+            value={selectedProductColor}
+            onChange={(e) => setSelectedProductColor(e.target.value)}
           >
             <option value="">Select Color</option>
             {renderDropdownOptions("productColorType")}
+          </select>
+        </div>
+
+        <div className="form-group col-md-12">
+          <label htmlFor="roomcolor">Room Color</label>
+          <select
+            id="roomcolor"
+            name="roomcolor"
+            className="form-control"
+            value={selectedRoomColor}
+            onChange={(e) => setSelectedRoomColor(e.target.value)}
+          >
+            <option value="">Select Color</option>
+            {renderDropdownOptions("roomColorType")}
           </select>
         </div>
       </div>
@@ -146,7 +447,7 @@ function EditForm() {
             id="angle"
             name="angle"
             className="form-control"
-            value={setAngle}
+            value={selectedAngle}
             onChange={(e) => setSelectedAngle(e.target.value)}
           >
             <option value="">Select Angle</option>
@@ -160,7 +461,7 @@ function EditForm() {
             id="roomLight"
             name="roomLight"
             className="form-control"
-            value={setRoomLight}
+            value={selectedRoomLight}
             onChange={(e) => setSelectedRoomLight(e.target.value)}
           >
             <option value="">Select Room Light</option>
@@ -174,7 +475,7 @@ function EditForm() {
             id="tone"
             name="tone"
             className="form-control"
-            value={setTone}
+            value={selectedTone}
             onChange={(e) => setSelectedTone(e.target.value)}
           >
             <option value="">Select tone</option>
