@@ -38,7 +38,6 @@ function EditForm() {
       .get(`https://data-7.onrender.com/api/getLifestyle/${id}`)
       .then((res) => {
         const data = res.data;
-        console.log(data.image);
         setSelectedImage(data.image);
         setSelectedRoomType(data.roomType);
         setSelectedProduct(data.product);
