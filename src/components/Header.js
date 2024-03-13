@@ -93,6 +93,25 @@ function Header() {
     else setSearchBtnClick(true);
   };
 
+  const downloadImage = (imageUrl) => {
+    fetch(imageUrl)
+      .then(response => response.blob())
+      .then(blob => {
+        const url = window.URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.setAttribute('download', 'image.jpg');
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        window.URL.revokeObjectURL(url);
+      })
+      .catch(error => {
+        console.error('Error downloading image:', error);
+      });
+};
+
+
   const renderTooltip = (type, text) => (
     <Tooltip id="tooltip">
       <strong>{roomdata[type]["definitions"][text]}</strong>
@@ -297,7 +316,17 @@ function Header() {
                           Product Color: {data.productColor}
                         </p>
                         <p className="card-text">Product Angle: {data.angle}</p>
-
+                        <p className="card-text text-left">
+                        <Link className="text-danger"
+                          onClick={() =>
+                            downloadImage(
+                              `https://backendlifestyle.netlify.app/images/${data.image}`
+                            )
+                          }
+                        >
+                           Download
+                        </Link>
+                        </p>
                         <p className="card-text text-right">
                           <Link to={`Edit/${data._id}`}>Edit</Link>{" "}
                           <span className="px-2">|</span>{" "}
