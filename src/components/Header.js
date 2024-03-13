@@ -75,7 +75,11 @@ function Header() {
       .post("https://data-7.onrender.com/api/lifestyle", dataToSend)
       .then((response) => {
         console.log("API response:", response.data);
-        setAPIData(response.data); // Update state with the received data
+        // Sort the data by createdAt property in descending order
+        const sortedData = response.data.sort(
+          (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+        );
+        setAPIData(sortedData); // Update state with the sorted data
         setIsLoading(false);
       })
       .catch((error) => {
