@@ -2,10 +2,12 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router";
 import axios from "axios";
 import roomdata from "../roomdata.json";
+import { useNavigate } from "react-router-dom";
+
 
 function EditForm() {
   let { id } = useParams();
-
+  const navigate = useNavigate( );
   const renderDropdownOptions = (key) => {
     if (
       roomdata.hasOwnProperty(key) &&
@@ -69,6 +71,7 @@ function EditForm() {
       .put(`https://data-7.onrender.com/api/updateLifestyle/` + id, dataToSend)
       .then((response) => {
         console.log("Edit response", response);
+        window.history.back();
       })
       .catch((error) => {
         console.error("Edit Error:", error);

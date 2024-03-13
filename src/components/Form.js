@@ -2,9 +2,14 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import roomdata from "../roomdata.json";
 import Card from "react-bootstrap/Card";
+import { useNavigate } from "react-router-dom";
+import Toast from 'react-bootstrap/Toast';
+
 
 function Form() {
   console.log("definitions",roomdata["productType"]["options"])
+  const navigate = useNavigate( );
+  const [showToast, setShowToast] = useState(false);
   const renderDropdownOptions = (key) => {
     // Check if the key exists in roomdata and it is an array
     if (roomdata.hasOwnProperty(key) && Array.isArray(roomdata[key]["options"])) {
@@ -57,6 +62,9 @@ function Form() {
       .post(`https://data-7.onrender.com/api/saveLifestyle`, dataToSend)
       .then((response) => {
         console.log("response", response);
+        setShowToast(true); 
+        setTimeout(() => setShowToast(false), 3000);
+        navigate(-1);
       });
   };
 
@@ -191,6 +199,21 @@ function Form() {
           </button>
         </div>
       </div>
+
+      {/* Bootstrap toast component */}
+      <Toast
+        show={showToast}
+        onClose={() => setShowToast(false)}
+        style={{
+          position: 'absolute',
+          top: 20,
+          right: 20,
+        }}
+        delay={1000} // Duration for which the toast will be displayed
+        autohide
+      >
+        <Toast.Body>Item Added</Toast.Body>
+      </Toast>
     </div>
   );
 }
