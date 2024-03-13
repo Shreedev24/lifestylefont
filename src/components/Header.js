@@ -324,7 +324,7 @@ function Header() {
                             )
                           }
                         >
-                           Download
+                           Download image
                         </Link>
                         </p>
                         <p className="card-text text-right">

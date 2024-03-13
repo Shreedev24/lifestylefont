@@ -61,7 +61,7 @@ function EditForm() {
       roomType: selectedRoomType,
       product: selectedProduct,
       productColor: selectedProductColor,
-      roomcolor: selectedRoomColor,
+      roomColor: selectedRoomColor,
       angle: selectedAngle,
       roomLight: selectedRoomLight,
       tone: selectedTone,
@@ -143,8 +143,8 @@ function EditForm() {
         <div className="form-group col-md-12">
           <label htmlFor="roomcolor">Room Color</label>
           <select
-            id="roomcolor"
-            name="roomcolor"
+            id="roomColor"
+            name="roomColor"
             className="form-control"
             value={selectedRoomColor}
             onChange={(e) => setSelectedRoomColor(e.target.value)}
