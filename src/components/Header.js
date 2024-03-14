@@ -9,6 +9,18 @@ import Toast from 'react-bootstrap/Toast';
 import ToastContainer from 'react-bootstrap/ToastContainer';
 
 function Pagination({ currentPage, totalPages, onPageChange }) {
+  const handlePreviousPage = () => {
+    if (currentPage > 1) {
+      onPageChange(currentPage - 1);
+    }
+  };
+
+  const handleNextPage = () => {
+    if (currentPage < totalPages) {
+      onPageChange(currentPage + 1);
+    }
+  };
+
   const pages = [];
 
   for (let i = 1; i <= totalPages; i++) {
@@ -23,7 +35,19 @@ function Pagination({ currentPage, totalPages, onPageChange }) {
 
   return (
     <nav>
-      <ul className="pagination justify-content-center">{pages}</ul>
+      <ul className="pagination justify-content-center">
+        <li className={`page-item ${currentPage === 1 ? "disabled" : ""}`}>
+          <button className="page-link" onClick={handlePreviousPage}>
+            Previous
+          </button>
+        </li>
+        {pages}
+        <li className={`page-item ${currentPage === totalPages ? "disabled" : ""}`}>
+          <button className="page-link" onClick={handleNextPage}>
+            Next
+          </button>
+        </li>
+      </ul>
     </nav>
   );
 }
@@ -157,7 +181,6 @@ function Header() {
   return (
     <>
     
-
       <div className="container">
       <div
         aria-live="polite"
