@@ -4,6 +4,8 @@ import roomdata from "../roomdata.json";
 import Card from "react-bootstrap/Card";
 import { Link } from "react-router-dom";
 import { OverlayTrigger, Tooltip } from "react-bootstrap";
+import Toast from 'react-bootstrap/Toast';
+
 
 function Header() {
   const renderDropdownOptions = (key) => {
@@ -25,6 +27,7 @@ function Header() {
     }
   };
 
+  const [showToast, setShowToast] = useState(false);
   const [APIData, setAPIData] = useState([]);
   const [setRoomType, setSelectedRoomType] = useState("");
   const [setProduct, setSelectedProduct] = useState("");
@@ -346,6 +349,23 @@ function Header() {
         )}
       </div>
       {/* <ImageGrid APIData={APIData} /> */}
+      <div>
+
+      {/* Bootstrap toast component */}
+      <Toast
+        show={showToast}
+        onClose={() => setShowToast(false)}
+        style={{
+          position: 'absolute',
+          top: 20,
+          right: 20,
+        }}
+        delay={1000} 
+        autohide
+      >
+        <Toast.Body>Item Added</Toast.Body>
+      </Toast>
+    </div>
     </>
   );
 }
