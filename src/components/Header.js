@@ -277,16 +277,6 @@ function Header() {
                 APIData.map((data, index) => (
                   <div key={index} className="col-md-4 mb-3">
                     <div className="card">
-                      {/* <img
-                        src={`https://backendlifestyle.netlify.app/images/${data.image}`}
-                        alt={`Image ${index + 1}`}
-                        className="card-img-top img-fluid"
-                        style={{
-                          minHeight: "348px",
-                          objectFit: "contain",
-                          background: "#f8f8f8",
-                        }}
-                      /> */}
                       <img
                         src={`https://backendlifestyle.netlify.app/images/${data.image}`}
                         // alt={`Image ${index + 1}`}
