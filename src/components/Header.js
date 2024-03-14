@@ -277,7 +277,7 @@ function Header() {
                 APIData.map((data, index) => (
                   <div key={index} className="col-md-4 mb-3">
                     <div className="card">
-                      <img
+                      {/* <img
                         src={`https://backendlifestyle.netlify.app/images/${data.image}`}
                         alt={`Image ${index + 1}`}
                         className="card-img-top img-fluid"
@@ -285,6 +285,22 @@ function Header() {
                           minHeight: "348px",
                           objectFit: "contain",
                           background: "#f8f8f8",
+                        }}
+                      /> */}
+                      <img
+                        src={`https://backendlifestyle.netlify.app/images/${data.image}`}
+                        // alt={`Image ${index + 1}`}
+                        alt=""
+                        className="card-img-top img-fluid object-fit-contain"
+                        style={{
+                          minHeight: "348px",
+                          objectFit: "contain",
+                          background: "#f8f8f8",
+                        }}
+                        onError={(e) => {
+                          e.target.onerror = null;
+                          e.target.src = "";
+                          e.target.style.background = "#f8f8f8";
                         }}
                       />
 
@@ -324,7 +340,7 @@ function Header() {
                         </p>
                         <p className="card-text">Product Angle: {data.angle}</p>
                         <p
-                          className="card-text text-left"
+                          className="card-text"
                           style={{ textAlign: "left", float: "left" }}
                         >
                           <Link
