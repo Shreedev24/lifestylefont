@@ -1,10 +1,37 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import PropTypes from "prop-types";
 import roomdata from "../roomdata.json";
 import Card from "react-bootstrap/Card";
 import { Link } from "react-router-dom";
 import { OverlayTrigger, Tooltip } from "react-bootstrap";
 import Toast from "react-bootstrap/Toast";
+
+function Pagination({ currentPage, totalPages, onPageChange }) {
+  const pages = [];
+
+  for (let i = 1; i <= totalPages; i++) {
+    pages.push(
+      <li key={i} className={`page-item ${i === currentPage ? "active" : ""}`}>
+        <button className="page-link" onClick={() => onPageChange(i)}>
+          {i}
+        </button>
+      </li>
+    );
+  }
+
+  return (
+    <nav>
+      <ul className="pagination justify-content-center">{pages}</ul>
+    </nav>
+  );
+}
+
+Pagination.propTypes = {
+  currentPage: PropTypes.number.isRequired,
+  totalPages: PropTypes.number.isRequired,
+  onPageChange: PropTypes.func.isRequired,
+};
 
 function Header() {
   const renderDropdownOptions = (key) => {
@@ -28,6 +55,8 @@ function Header() {
 
   const [showToast, setShowToast] = useState(false);
   const [APIData, setAPIData] = useState([]);
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
   const [setRoomType, setSelectedRoomType] = useState("");
   const [setProduct, setSelectedProduct] = useState("");
   const [setProductColor, setSelectedProductColor] = useState("");
@@ -38,8 +67,13 @@ function Header() {
   const [setSearchBar, setSelectedSearchBar] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [isSearchBtnClick, setSearchBtnClick] = useState(false);
+  const itemsPerPage = 9;
 
   var dataToSend = {};
+
+  const handlePageChange = (pageNumber) => {
+    setPage(pageNumber);
+  };
 
   const handleDelete = (id) => {
     const isConfirmed = window.confirm(
@@ -274,7 +308,10 @@ function Header() {
 
             <div className="row">
               {APIData &&
-                APIData.map((data, index) => (
+                APIData.slice(
+                  (page - 1) * itemsPerPage,
+                  page * itemsPerPage
+                ).map((data, index) => (
                   <div key={index} className="col-md-4 mb-3">
                     <div className="card">
                       <img
@@ -360,6 +397,11 @@ function Header() {
                   </div>
                 ))}
             </div>
+            <Pagination
+              currentPage={page}
+              totalPages={Math.ceil(APIData.length / itemsPerPage)}
+              onPageChange={handlePageChange}
+            />
           </>
         )}
       </div>
