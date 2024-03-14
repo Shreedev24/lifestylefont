@@ -8,18 +8,31 @@ import { OverlayTrigger, Tooltip } from "react-bootstrap";
 import Toast from 'react-bootstrap/Toast';
 import ToastContainer from 'react-bootstrap/ToastContainer';
 
+const scrollToTop = () => {
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth" // Optional: smooth scrolling animation
+  });
+};
+
 function Pagination({ currentPage, totalPages, onPageChange }) {
+
+  
   const handlePreviousPage = () => {
     if (currentPage > 1) {
       onPageChange(currentPage - 1);
+      scrollToTop();
     }
   };
 
   const handleNextPage = () => {
     if (currentPage < totalPages) {
       onPageChange(currentPage + 1);
+      scrollToTop();
     }
   };
+
+  
 
   const pages = [];
 
@@ -98,6 +111,7 @@ function Header() {
 
   const handlePageChange = (pageNumber) => {
     setPage(pageNumber);
+    scrollToTop();
   };
 
   const handleDelete = (id) => {
