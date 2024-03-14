@@ -1,16 +1,19 @@
 import React, { useState, useEffect } from "react";
+import { useParams } from "react-router";
 import axios from "axios";
 import roomdata from "../roomdata.json";
-import Card from "react-bootstrap/Card";
 import { useNavigate } from "react-router-dom";
-import Toast from 'react-bootstrap/Toast';
 
 
-function Form() {
-  console.log("definitions",roomdata["productType"]["options"])
+function EditForm() {
+  let { id } = useParams();
   const navigate = useNavigate( );
-  const renderDropdownOptions = (key) => {
-      if (roomdata.hasOwnProperty(key) && Array.isArray(roomdata[key]["options"])) {
+  const renderDropdownOptions = (key)=> {
+    if (
+      roomdata.hasOwnProperty(key)
+ &&
+      Array.isArray(roomdata[key]["options"])
+    ) {
       return roomdata[key]["options"].map((item, index) => (
         <option key={index} value={item}>
           {item}
@@ -18,59 +21,68 @@ function Form() {
       ));
     } else {
       console.error(`Invalid key or data for ${key}`);
-      return null; 
+      return null;
     }
   };
-  const [showToast, setShowToast] = useState(false);
-  const [APIData, setAPIData] = useState([]);
-  const [filteredResults, setFilteredResults] = useState([]);
-  const [searchInput, setSearchInput] = useState("");
-  const [setRoomType, setSelectedroomType] = useState([]);
-  const [setProduct, setSelectedProduct] = useState([]);
-  const [setProductColor, setSelectedProductColor] = useState([]);
-  const [setRoomColor, setSelectedRoomColor] = useState([]);
-  const [setAngle, setSelectedAngle] = useState([]);
-  const [setRoomLight, setSelectedRoomLight] = useState([]);
-  const [setTone, setSelectedTone] = useState([]);
-  const [setImage, setSelectedImage] = useState([]);
 
-  // const handleclick = () => {
-  //     axios.post(`https://data-7.onrender.com/api/lifestyle`)
-  //     .then((response) => {
-  //       console.log("response",response)
-  //         setAPIData(response.data);
-  //     })
-  // }
+  const [APIData, setAPIData] = useState({});
+  const [selectedRoomType, setSelectedRoomType] = useState("");
+  const [selectedProduct, setSelectedProduct] = useState("");
+  const [selectedProductColor, setSelectedProductColor] = useState("");
+  const [selectedRoomColor, setSelectedRoomColor] = useState("");
+  const [selectedAngle, setSelectedAngle] = useState("");
+  const [selectedRoomLight, setSelectedRoomLight] = useState("");
+  const [selectedTone, setSelectedTone] = useState("");
+  const [selectedImage, setSelectedImage] = useState("");
+  const [isEdit, setIsEdit] = useState(false);
 
-  const handleclick = () => {
+  useEffect(() => {
+    axios
+      .get(`https://data-7.onrender.com/api/getLifestyle/${id}`)
+      .then((res) => {
+        const data = res.data;
+        setSelectedImage(data.image);
+        setSelectedRoomType(data.roomType);
+        setSelectedProduct(data.product);
+        setSelectedProductColor(data.productColor);
+        setSelectedRoomColor(data.roomColor);
+        setSelectedAngle(data.angle);
+        setSelectedRoomLight(data.roomLight);
+        setSelectedTone(data.tone);
+        setAPIData(data); // Update state with the received data
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+      });
+  }, [id]);
+
+  const handleSave = () => {
     const dataToSend = {
-      image: setImage,
-      roomType: setRoomType,
-      product: setProduct,
-      productColor: setProductColor,
-      roomColor: setRoomColor,
-      angle: setAngle,
-      roomLight: setRoomLight,
-      tone: setTone,
+      image: selectedImage,
+      roomType: selectedRoomType,
+      product: selectedProduct,
+      productColor: selectedProductColor,
+      roomColor: selectedRoomColor,
+      angle: selectedAngle,
+      roomLight: selectedRoomLight,
+      tone: selectedTone,
     };
 
     axios
-    .post(`https://data-7.onrender.com/api/saveLifestyle`, dataToSend)
-    .then((response) => {
-      console.log("response", response);
-      navigate(-1); 
-      setShowToast(true); 
-      setTimeout(() => setShowToast(false), 3000); 
-    })
-    .catch((error) => {
-      console.error("Error:", error);
-    });
-};
+      .put(`https://data-7.onrender.com/api/updateLifestyle/` + id, dataToSend)
+      .then((response) => {
+        console.log("Edit response", response);
+        window.history.back();
+      })
+      .catch((error) => {
+        console.error("Edit Error:", error);
+      });
+  };
 
   return (
     <div className="container">
       <div className="text-center py-3">
-        <h1>Add New Room</h1>
+        <h1>Edit Room</h1>
       </div>
 
       <div className="form-row align-items-end">
@@ -82,6 +94,7 @@ function Form() {
             name="image"
             className="form-control"
             placeholder="Enter Image"
+            value={selectedImage}
             onChange={(e) => setSelectedImage(e.target.value)}
           />
         </div>
@@ -92,8 +105,8 @@ function Form() {
             id="roomType"
             name="roomType"
             className="form-control"
-            value={setRoomType}
-            onChange={(e) => setSelectedroomType(e.target.value)}
+            value={selectedRoomType}
+            onChange={(e) => setSelectedRoomType(e.target.value)}
           >
             <option value="">Select Style</option>
             {renderDropdownOptions("roomType")}
@@ -106,7 +119,7 @@ function Form() {
             id="product"
             name="product"
             className="form-control"
-            value={setProduct}
+            value={selectedProduct}
             onChange={(e) => setSelectedProduct(e.target.value)}
           >
             <option value="">Select Product</option>
@@ -120,7 +133,7 @@ function Form() {
             id="productcolor"
             name="productcolor"
             className="form-control"
-            value={setProductColor}
+            value={selectedProductColor}
             onChange={(e) => setSelectedProductColor(e.target.value)}
           >
             <option value="">Select Color</option>
@@ -131,10 +144,10 @@ function Form() {
         <div className="form-group col-md-12">
           <label htmlFor="roomcolor">Room Color</label>
           <select
-            id="roomcolor"
-            name="roomcolor"
+            id="roomColor"
+            name="roomColor"
             className="form-control"
-            value={setRoomColor}
+            value={selectedRoomColor}
             onChange={(e) => setSelectedRoomColor(e.target.value)}
           >
             <option value="">Select Color</option>
@@ -150,7 +163,7 @@ function Form() {
             id="angle"
             name="angle"
             className="form-control"
-            value={setAngle}
+            value={selectedAngle}
             onChange={(e) => setSelectedAngle(e.target.value)}
           >
             <option value="">Select Angle</option>
@@ -164,7 +177,7 @@ function Form() {
             id="roomLight"
             name="roomLight"
             className="form-control"
-            value={setRoomLight}
+            value={selectedRoomLight}
             onChange={(e) => setSelectedRoomLight(e.target.value)}
           >
             <option value="">Select Room Light</option>
@@ -178,7 +191,7 @@ function Form() {
             id="tone"
             name="tone"
             className="form-control"
-            value={setTone}
+            value={selectedTone}
             onChange={(e) => setSelectedTone(e.target.value)}
           >
             <option value="">Select tone</option>
@@ -192,29 +205,14 @@ function Form() {
           <button
             type="submit"
             className="btn btn-primary btn-block"
-            onClick={handleclick}
+            onClick={handleSave}
           >
             Save Room
           </button>
         </div>
       </div>
-
-      {/* Bootstrap toast component */}
-      <Toast
-        show={showToast}
-        onClose={() => setShowToast(false)}
-        style={{
-          position: 'absolute',
-          top: 20,
-          right: 20,
-        }}
-        delay={1000} 
-        autohide
-      >
-        <Toast.Body>Item Added</Toast.Body>
-      </Toast>
     </div>
   );
 }
 
-export default Form;
+export default EditForm;
