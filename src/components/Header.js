@@ -5,7 +5,7 @@ import Card from "react-bootstrap/Card";
 import { Link } from "react-router-dom";
 import { OverlayTrigger, Tooltip } from "react-bootstrap";
 import Toast from 'react-bootstrap/Toast';
-
+import ToastContainer from 'react-bootstrap/ToastContainer';
 
 function Header() {
   const renderDropdownOptions = (key) => {
@@ -123,7 +123,26 @@ function Header() {
 
   return (
     <>
+    
+
       <div className="container">
+      <div
+        aria-live="polite"
+        aria-atomic="true"
+        className="position-relative"
+        style={{ minHeight: '40px' }}
+      >
+      <ToastContainer position="top-center" className="p-3" style={{ zIndex: 1,width: "max-content" }}>
+      <Toast>
+      <Toast.Header closeButton={false}>
+        <strong className="me-auto">Sucess</strong>
+        {/* <small>11 mins ago</small> */}
+      </Toast.Header>
+      <Toast.Body>Item Saved!</Toast.Body>
+    </Toast>
+    </ToastContainer>
+    </div>
+
         <div className=" py-3 w-100">
           <h1 className="text-center">Lifestyle Rooms</h1>
           <p className="text-right">
@@ -350,21 +369,6 @@ function Header() {
       </div>
       {/* <ImageGrid APIData={APIData} /> */}
       <div>
-
-      {/* Bootstrap toast component */}
-      <Toast
-        show={showToast}
-        onClose={() => setShowToast(false)}
-        style={{
-          position: 'absolute',
-          top: 20,
-          right: 20,
-        }}
-        delay={1000} 
-        autohide
-      >
-        <Toast.Body>Item Added</Toast.Body>
-      </Toast>
     </div>
     </>
   );
