@@ -98,22 +98,21 @@ function Header() {
 
   const downloadImage = (imageUrl) => {
     fetch(imageUrl)
-      .then(response => response.blob())
-      .then(blob => {
+      .then((response) => response.blob())
+      .then((blob) => {
         const url = window.URL.createObjectURL(blob);
-        const link = document.createElement('a');
+        const link = document.createElement("a");
         link.href = url;
-        link.setAttribute('download', 'image.jpg');
+        link.setAttribute("download", "image.jpg");
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
         window.URL.revokeObjectURL(url);
       })
-      .catch(error => {
-        console.error('Error downloading image:', error);
+      .catch((error) => {
+        console.error("Error downloading image:", error);
       });
-};
-
+  };
 
   const renderTooltip = (type, text) => (
     <Tooltip id="tooltip">
@@ -300,9 +299,21 @@ function Header() {
                     <div className="card">
                       <img
                         src={`https://backendlifestyle.netlify.app/images/${data.image}`}
-                        alt={`Image ${index + 1}`}
-                        className="card-img-top img-fluid"
+                        // alt={`Image ${index + 1}`}
+                        alt=""
+                        className="card-img-top img-fluid object-fit-contain"
+                        style={{
+                          minHeight: "348px",
+                          objectFit: "contain",
+                          background: "#f8f8f8",
+                        }}
+                        onError={(e) => {
+                          e.target.onerror = null;
+                          e.target.src = "";
+                          e.target.style.background = "#f8f8f8";
+                        }}
                       />
+
                       <div className="card-body">
                         <h5 className="card-title">{data.product}</h5>
 
@@ -338,17 +349,22 @@ function Header() {
                           Product Color: {data.productColor}
                         </p>
                         <p className="card-text">Product Angle: {data.angle}</p>
-                        <p className="card-text text-left">
-                        <Link className="text-danger"
-                          onClick={() =>
-                            downloadImage(
-                              `https://backendlifestyle.netlify.app/images/${data.image}`
-                            )
-                          }
+                        <p
+                          className="card-text"
+                          style={{ textAlign: "left", float: "left" }}
                         >
-                           Download image
-                        </Link>
+                          <Link
+                            className="text-secondary"
+                            onClick={() =>
+                              downloadImage(
+                                `https://backendlifestyle.netlify.app/images/${data.image}`
+                              )
+                            }
+                          >
+                            Download
+                          </Link>
                         </p>
+
                         <p className="card-text text-right">
                           <Link to={`Edit/${data._id}`}>Edit</Link>{" "}
                           <span className="px-2">|</span>{" "}
@@ -368,8 +384,6 @@ function Header() {
         )}
       </div>
       {/* <ImageGrid APIData={APIData} /> */}
-      <div>
-    </div>
     </>
   );
 }
