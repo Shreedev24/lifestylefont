@@ -95,6 +95,10 @@ function Header() {
     }
   };
 
+  const saveNewItem = () => {
+    setShowToast(true);
+  };
+
   useEffect(() => {
     dataToSend = {
       roomType: setRoomType,
@@ -118,6 +122,7 @@ function Header() {
         );
         setAPIData(sortedData); // Update state with the sorted data
         setIsLoading(false);
+        saveNewItem(); // Call saveNewItem to show the toast after successfully saving the item
       })
       .catch((error) => {
         console.error("Error:", error);
@@ -156,8 +161,6 @@ function Header() {
 
   return (
     <>
-    
-
       <div className="container">
       <div
         aria-live="polite"
@@ -166,9 +169,9 @@ function Header() {
         style={{ minHeight: '40px' }}
       >
       <ToastContainer position="top-center" className="p-3" style={{ zIndex: 1,width: "max-content" }}>
-      <Toast>
+      <Toast show={showToast} onClose={() => setShowToast(false)}>
       <Toast.Header closeButton={false}>
-        <strong className="me-auto">Sucess</strong>
+        <strong className="me-auto">Success</strong>
         {/* <small>11 mins ago</small> */}
       </Toast.Header>
       <Toast.Body>Item Saved!</Toast.Body>
@@ -429,5 +432,6 @@ function Header() {
     </>
   );
 }
+
 
 export default Header;
