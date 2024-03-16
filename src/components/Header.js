@@ -108,8 +108,8 @@ function Header() {
 
   var dataToSend = {};
 
-  const handlePageChange = (pageNumber) => {
-    setPage(pageNumber);
+  const handlePageChange = (page) => {
+    setPage(page);
     scrollToTop();
   };
 
@@ -162,7 +162,7 @@ function Header() {
         console.error("Error:", error);
         setIsLoading(false);
       });
-  }, [isSearchBtnClick]);
+  }, [isSearchBtnClick, page]);
 
   const btnSearchClick = () => {
     if (isSearchBtnClick) setSearchBtnClick(false);
