@@ -104,7 +104,7 @@ function Header() {
   const [setSearchBar, setSelectedSearchBar] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [isSearchBtnClick, setSearchBtnClick] = useState(false);
-  const limit = 5;
+  const limit = 30;
 
   var dataToSend = {};
 
