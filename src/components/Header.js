@@ -5,19 +5,17 @@ import roomdata from "../roomdata.json";
 import Card from "react-bootstrap/Card";
 import { Link } from "react-router-dom";
 import { OverlayTrigger, Tooltip } from "react-bootstrap";
-import Toast from 'react-bootstrap/Toast';
-import ToastContainer from 'react-bootstrap/ToastContainer';
+import Toast from "react-bootstrap/Toast";
+import ToastContainer from "react-bootstrap/ToastContainer";
 
 const scrollToTop = () => {
   window.scrollTo({
     top: 0,
-    behavior: "smooth" 
+    behavior: "smooth",
   });
 };
 
 function Pagination({ currentPage, totalPages, onPageChange }) {
-
-  
   const handlePreviousPage = () => {
     if (currentPage > 1) {
       onPageChange(currentPage - 1);
@@ -31,8 +29,6 @@ function Pagination({ currentPage, totalPages, onPageChange }) {
       scrollToTop();
     }
   };
-
-  
 
   const pages = [];
 
@@ -55,7 +51,9 @@ function Pagination({ currentPage, totalPages, onPageChange }) {
           </button>
         </li>
         {pages}
-        <li className={`page-item ${currentPage === totalPages ? "disabled" : ""}`}>
+        <li
+          className={`page-item ${currentPage === totalPages ? "disabled" : ""}`}
+        >
           <button className="page-link" onClick={handleNextPage}>
             Next
           </button>
@@ -149,12 +147,8 @@ function Header() {
     axios
       .post("https://data-7.onrender.com/api/lifestyle", dataToSend)
       .then((response) => {
-        console.log("API response:", response.data);
-        // Sort the data by createdAt property in descending order
-        const sortedData = response.data.sort(
-          (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
-        );
-        setAPIData(sortedData); // Update state with the sorted data
+        console.log("API response.lifestyles:", response.data.lifestyles);
+        setAPIData(response.data.lifestyles); // Update state with the sorted data
         setIsLoading(false);
       })
       .catch((error) => {
@@ -194,24 +188,27 @@ function Header() {
 
   return (
     <>
-    
       <div className="container">
-      <div
-        aria-live="polite"
-        aria-atomic="true"
-        className="position-relative"
-        style={{ minHeight: '40px' }}
-      >
-      <ToastContainer position="top-center" className="p-3" style={{ zIndex: 1,width: "max-content" }}>
-      <Toast>
-      <Toast.Header closeButton={false}>
-        <strong className="me-auto">Sucess</strong>
-        {/* <small>11 mins ago</small> */}
-      </Toast.Header>
-      <Toast.Body>Item Saved!</Toast.Body>
-    </Toast>
-    </ToastContainer>
-    </div>
+        <div
+          aria-live="polite"
+          aria-atomic="true"
+          className="position-relative"
+          style={{ minHeight: "40px" }}
+        >
+          <ToastContainer
+            position="top-center"
+            className="p-3"
+            style={{ zIndex: 1, width: "max-content" }}
+          >
+            <Toast>
+              <Toast.Header closeButton={false}>
+                <strong className="me-auto">Sucess</strong>
+                {/* <small>11 mins ago</small> */}
+              </Toast.Header>
+              <Toast.Body>Item Saved!</Toast.Body>
+            </Toast>
+          </ToastContainer>
+        </div>
 
         <div className=" py-3 w-100">
           <h1 className="text-center">Lifestyle Rooms</h1>
