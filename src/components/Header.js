@@ -93,6 +93,7 @@ function Header() {
   const [APIData, setAPIData] = useState([]);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
+  const [totalRecords, setTotalRecords] = useState(0);
   const [setRoomType, setSelectedRoomType] = useState("");
   const [setProduct, setSelectedProduct] = useState("");
   const [setProductColor, setSelectedProductColor] = useState("");
@@ -103,7 +104,7 @@ function Header() {
   const [setSearchBar, setSelectedSearchBar] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [isSearchBtnClick, setSearchBtnClick] = useState(false);
-  const itemsPerPage = 9;
+  const limit = 5;
 
   var dataToSend = {};
 
@@ -141,14 +142,20 @@ function Header() {
       roomLight: setRoomLight,
       tone: setTone,
       searchBar: setSearchBar,
+      limit: limit,
+      page: page,
     };
 
     setIsLoading(true);
     axios
       .post("https://data-7.onrender.com/api/lifestyle", dataToSend)
       .then((response) => {
-        console.log("API response.lifestyles:", response.data.lifestyles);
+        console.log("API response.lifestyles:", response.data);
         setAPIData(response.data.lifestyles); // Update state with the sorted data
+        setTotalPages(response.data.totalPages);
+        setTotalRecords(response.data.totalDocuments);
+        // console.log("totalRecords", totalRecords, response.data.totalDocuments);
+        // console.log("totalPages", totalPages, response.data.totalPages);
         setIsLoading(false);
       })
       .catch((error) => {
@@ -362,10 +369,7 @@ function Header() {
 
             <div className="row">
               {APIData &&
-                APIData.slice(
-                  (page - 1) * itemsPerPage,
-                  page * itemsPerPage
-                ).map((data, index) => (
+                APIData.map((data, index) => (
                   <div key={index} className="col-md-4 mb-3">
                     <div className="card">
                       <img
@@ -453,7 +457,7 @@ function Header() {
             </div>
             <Pagination
               currentPage={page}
-              totalPages={Math.ceil(APIData.length / itemsPerPage)}
+              totalPages={totalPages}
               onPageChange={handlePageChange}
             />
           </>
