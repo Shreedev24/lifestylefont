@@ -162,9 +162,10 @@ function Header() {
         console.error("Error:", error);
         setIsLoading(false);
       });
-  }, [isSearchBtnClick, page]);
+  }, [isSearchBtnClick]);
 
   const btnSearchClick = () => {
+    setPage(page);
     if (isSearchBtnClick) setSearchBtnClick(false);
     else setSearchBtnClick(true);
   };
