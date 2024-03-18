@@ -400,27 +400,27 @@ function Header() {
                         <p className="card-text m-0">
                           <button
                             type="button"
-                            className="btn btn-outline-secondary m-2"
+                            className="btn btn-sm btn-outline-secondary m-1"
                           >
                             {data.roomType} style
                           </button>
                           <button
                             type="button"
-                            className="btn btn-outline-secondary m-2"
+                            className="btn btn-sm btn-outline-secondary m-1"
                           >
                             {data.roomColor} room-color
                           </button>
 
                           <button
                             type="button"
-                            className="btn btn-outline-warning m-2"
+                            className="btn btn-sm btn-outline-secondary m-1"
                           >
                             {data.roomLight} light
                           </button>
 
                           <button
                             type="button"
-                            className="btn btn-outline-info m-2"
+                            className="btn btn-sm btn-outline-secondary m-1"
                           >
                             {data.tone} tone
                           </button>
@@ -429,13 +429,13 @@ function Header() {
                         <p className="card-text m-0">
                           <button
                             type="button"
-                            className="btn btn-outline-dark m-2"
+                            className="btn btn-sm btn-outline-secondary m-1"
                           >
                             {data.productColor} product-color
                           </button>
                           <button
                             type="button"
-                            className="btn btn-outline-danger m-2"
+                            className="btn btn-sm btn-outline-secondary m-1"
                           >
                             {data.angle} angle
                           </button>
