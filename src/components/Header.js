@@ -209,7 +209,7 @@ function Header() {
             className="p-3"
             style={{ zIndex: 1, width: "max-content" }}
           >
-            <Toast>
+            <Toast className="hide">
               <Toast.Header closeButton={false}>
                 <strong className="me-auto">Sucess</strong>
                 {/* <small>11 mins ago</small> */}
@@ -380,7 +380,7 @@ function Header() {
                         title={data.image}
                         className="card-img-top img-fluid object-fit-contain"
                         style={{
-                          minHeight: "348px",
+                          minHeight: "300px",
                           objectFit: "scale-down",
                           background: "#f8f8f8",
                         }}
@@ -397,24 +397,50 @@ function Header() {
                       <div className="card-body">
                         <h5 className="card-title">{data.product}</h5>
 
+                        <p className="card-text m-0">
+                          <button
+                            type="button"
+                            className="btn btn-outline-secondary m-2"
+                          >
+                            {data.roomType} style
+                          </button>
+                          <button
+                            type="button"
+                            className="btn btn-outline-secondary m-2"
+                          >
+                            {data.roomColor} room-color
+                          </button>
+
+                          <button
+                            type="button"
+                            className="btn btn-outline-warning m-2"
+                          >
+                            {data.roomLight} light
+                          </button>
+
+                          <button
+                            type="button"
+                            className="btn btn-outline-info m-2"
+                          >
+                            {data.tone} tone
+                          </button>
+                        </p>
+
+                        <p className="card-text m-0">
+                          <button
+                            type="button"
+                            className="btn btn-outline-dark m-2"
+                          >
+                            {data.productColor} product-color
+                          </button>
+                          <button
+                            type="button"
+                            className="btn btn-outline-danger m-2"
+                          >
+                            {data.angle} angle
+                          </button>
+                        </p>
                         {/* <p className="card-text">
-                          <button
-                            type="button"
-                            className="btn btn-outline-secondary"
-                          >
-                            {data.roomType}
-                          </button>
-                          <button
-                            type="button"
-                            className="btn btn-outline-light ml-2"
-                            style={{
-                              background: "#fff",
-                            }}
-                          >
-                            {data.roomColor}
-                          </button>
-                        </p> */}
-                        <p className="card-text">
                           <OverlayTrigger
                             placement="top"
                             overlay={renderTooltip("roomType", data.roomType)}
@@ -445,13 +471,13 @@ function Header() {
                         <p className="card-text">
                           Product Color: {data.productColor}
                         </p>
-                        <p className="card-text">Product Angle: {data.angle}</p>
+                        <p className="card-text">Product Angle: {data.angle}</p> */}
                         <p
                           className="card-text"
                           style={{ textAlign: "left", float: "left" }}
                         >
                           <Link
-                            className="text-secondary"
+                            className="badge rounded-pill bg-light text-secondary"
                             onClick={() =>
                               downloadImage(
                                 `https://backendlifestyle.netlify.app/images/${data.image}`
@@ -463,7 +489,12 @@ function Header() {
                         </p>
 
                         <p className="card-text text-right">
-                          <Link to={`Edit/${data._id}`}>Edit</Link>{" "}
+                          <Link
+                            className="text-secondary"
+                            to={`Edit/${data._id}`}
+                          >
+                            Edit
+                          </Link>{" "}
                           <span className="px-2">|</span>{" "}
                           <Link
                             className="text-danger"
