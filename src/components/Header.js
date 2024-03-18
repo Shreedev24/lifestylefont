@@ -390,7 +390,9 @@ function Header() {
                           e.target.style.background = "#f8f8f8";
                         }}
                       />
-                      <p className="text-over-img">{data.image}</p>
+                      <p className="p-2 position-absolute text-over-img">
+                        <span className="badge badge-dark">{data.image}</span>
+                      </p>
 
                       <div className="card-body">
                         <h5 className="card-title">{data.product}</h5>
