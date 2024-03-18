@@ -5,10 +5,31 @@ import roomdata from "../roomdata.json";
 import Card from "react-bootstrap/Card";
 import { Link } from "react-router-dom";
 import { OverlayTrigger, Tooltip } from "react-bootstrap";
-import Toast from 'react-bootstrap/Toast';
-import ToastContainer from 'react-bootstrap/ToastContainer';
+import Toast from "react-bootstrap/Toast";
+import ToastContainer from "react-bootstrap/ToastContainer";
+
+const scrollToTop = () => {
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth",
+  });
+};
 
 function Pagination({ currentPage, totalPages, onPageChange }) {
+  const handlePreviousPage = () => {
+    if (currentPage > 1) {
+      onPageChange(currentPage - 1);
+      scrollToTop();
+    }
+  };
+
+  const handleNextPage = () => {
+    if (currentPage < totalPages) {
+      onPageChange(currentPage + 1);
+      scrollToTop();
+    }
+  };
+
   const pages = [];
 
   for (let i = 1; i <= totalPages; i++) {
@@ -23,7 +44,21 @@ function Pagination({ currentPage, totalPages, onPageChange }) {
 
   return (
     <nav>
-      <ul className="pagination justify-content-center">{pages}</ul>
+      <ul className="pagination justify-content-center">
+        <li className={`page-item ${currentPage === 1 ? "disabled" : ""}`}>
+          <button className="page-link" onClick={handlePreviousPage}>
+            Previous
+          </button>
+        </li>
+        {pages}
+        <li
+          className={`page-item ${currentPage === totalPages ? "disabled" : ""}`}
+        >
+          <button className="page-link" onClick={handleNextPage}>
+            Next
+          </button>
+        </li>
+      </ul>
     </nav>
   );
 }
@@ -58,6 +93,7 @@ function Header() {
   const [APIData, setAPIData] = useState([]);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
+  const [totalRecords, setTotalRecords] = useState(0);
   const [setRoomType, setSelectedRoomType] = useState("");
   const [setProduct, setSelectedProduct] = useState("");
   const [setProductColor, setSelectedProductColor] = useState("");
@@ -68,12 +104,14 @@ function Header() {
   const [setSearchBar, setSelectedSearchBar] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [isSearchBtnClick, setSearchBtnClick] = useState(false);
-  const itemsPerPage = 9;
+  const limit = 30;
 
   var dataToSend = {};
 
-  const handlePageChange = (pageNumber) => {
-    setPage(pageNumber);
+  const handlePageChange = (page) => {
+    setPage(page);
+    setSearchBtnClick(true);
+    scrollToTop();
   };
 
   const handleDelete = (id) => {
@@ -95,10 +133,6 @@ function Header() {
     }
   };
 
-  const saveNewItem = () => {
-    setShowToast(true);
-  };
-
   useEffect(() => {
     dataToSend = {
       roomType: setRoomType,
@@ -109,28 +143,30 @@ function Header() {
       roomLight: setRoomLight,
       tone: setTone,
       searchBar: setSearchBar,
+      limit: limit,
+      page: page,
     };
 
     setIsLoading(true);
     axios
       .post("https://data-7.onrender.com/api/lifestyle", dataToSend)
       .then((response) => {
-        console.log("API response:", response.data);
-        // Sort the data by createdAt property in descending order
-        const sortedData = response.data.sort(
-          (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
-        );
-        setAPIData(sortedData); // Update state with the sorted data
+        console.log("API response.lifestyles:", response.data);
+        setAPIData(response.data.lifestyles); // Update state with the sorted data
+        setTotalPages(response.data.totalPages);
+        setTotalRecords(response.data.totalDocuments);
+        // console.log("totalRecords", totalRecords, response.data.totalDocuments);
+        // console.log("totalPages", totalPages, response.data.totalPages);
         setIsLoading(false);
-        saveNewItem(); // Call saveNewItem to show the toast after successfully saving the item
       })
       .catch((error) => {
         console.error("Error:", error);
         setIsLoading(false);
       });
-  }, [isSearchBtnClick]);
+  }, [isSearchBtnClick, page]);
 
   const btnSearchClick = () => {
+    setPage(1);
     if (isSearchBtnClick) setSearchBtnClick(false);
     else setSearchBtnClick(true);
   };
@@ -161,23 +197,27 @@ function Header() {
 
   return (
     <>
-      <div className="container">
-      <div
-        aria-live="polite"
-        aria-atomic="true"
-        className="position-relative"
-        style={{ minHeight: '40px' }}
-      >
-      <ToastContainer position="top-center" className="p-3" style={{ zIndex: 1,width: "max-content" }}>
-      <Toast show={showToast} onClose={() => setShowToast(false)}>
-      <Toast.Header closeButton={false}>
-        <strong className="me-auto">Success</strong>
-        {/* <small>11 mins ago</small> */}
-      </Toast.Header>
-      <Toast.Body>Item Saved!</Toast.Body>
-    </Toast>
-    </ToastContainer>
-    </div>
+      <div className="container-fluid">
+        <div
+          aria-live="polite"
+          aria-atomic="true"
+          className="position-relative"
+          style={{ minHeight: "40px" }}
+        >
+          <ToastContainer
+            position="top-center"
+            className="p-3"
+            style={{ zIndex: 1, width: "max-content" }}
+          >
+            <Toast>
+              <Toast.Header closeButton={false}>
+                <strong className="me-auto">Sucess</strong>
+                {/* <small>11 mins ago</small> */}
+              </Toast.Header>
+              <Toast.Body>Item Saved!</Toast.Body>
+            </Toast>
+          </ToastContainer>
+        </div>
 
         <div className=" py-3 w-100">
           <h1 className="text-center">Lifestyle Rooms</h1>
@@ -313,7 +353,7 @@ function Header() {
         </div>
       </div>
 
-      <div className="container mt-3">
+      <div className="container-fluid mt-3">
         <div className="row">
           <div className="col-md-12">
             <hr />
@@ -331,20 +371,17 @@ function Header() {
 
             <div className="row">
               {APIData &&
-                APIData.slice(
-                  (page - 1) * itemsPerPage,
-                  page * itemsPerPage
-                ).map((data, index) => (
+                APIData.map((data, index) => (
                   <div key={index} className="col-md-4 mb-3">
                     <div className="card">
                       <img
                         src={`https://backendlifestyle.netlify.app/images/${data.image}`}
                         // alt={`Image ${index + 1}`}
-                        alt=""
+                        title={data.image}
                         className="card-img-top img-fluid object-fit-contain"
                         style={{
                           minHeight: "348px",
-                          objectFit: "contain",
+                          objectFit: "none",
                           background: "#f8f8f8",
                         }}
                         onError={(e) => {
@@ -353,6 +390,9 @@ function Header() {
                           e.target.style.background = "#f8f8f8";
                         }}
                       />
+                      <p className="p-2 position-absolute text-over-img">
+                        <span className="badge badge-dark">{data.image}</span>
+                      </p>
 
                       <div className="card-body">
                         <h5 className="card-title">{data.product}</h5>
@@ -422,7 +462,7 @@ function Header() {
             </div>
             <Pagination
               currentPage={page}
-              totalPages={Math.ceil(APIData.length / itemsPerPage)}
+              totalPages={totalPages}
               onPageChange={handlePageChange}
             />
           </>
@@ -432,6 +472,5 @@ function Header() {
     </>
   );
 }
-
 
 export default Header;
