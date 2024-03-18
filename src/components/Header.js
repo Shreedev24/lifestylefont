@@ -110,6 +110,7 @@ function Header() {
 
   const handlePageChange = (page) => {
     setPage(page);
+    setSearchBtnClick(true);
     scrollToTop();
   };
 
@@ -162,10 +163,10 @@ function Header() {
         console.error("Error:", error);
         setIsLoading(false);
       });
-  }, [isSearchBtnClick]);
+  }, [isSearchBtnClick, page]);
 
   const btnSearchClick = () => {
-    setPage(page);
+    setPage(1);
     if (isSearchBtnClick) setSearchBtnClick(false);
     else setSearchBtnClick(true);
   };
@@ -196,7 +197,7 @@ function Header() {
 
   return (
     <>
-      <div className="container">
+      <div className="container-fluid">
         <div
           aria-live="polite"
           aria-atomic="true"
@@ -352,7 +353,7 @@ function Header() {
         </div>
       </div>
 
-      <div className="container mt-3">
+      <div className="container-fluid mt-3">
         <div className="row">
           <div className="col-md-12">
             <hr />
@@ -376,7 +377,7 @@ function Header() {
                       <img
                         src={`https://backendlifestyle.netlify.app/images/${data.image}`}
                         // alt={`Image ${index + 1}`}
-                        alt=""
+                        title={data.image}
                         className="card-img-top img-fluid object-fit-contain"
                         style={{
                           minHeight: "348px",
