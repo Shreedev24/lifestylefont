@@ -171,6 +171,21 @@ function Header() {
     else setSearchBtnClick(true);
   };
 
+  const btnResetClick = () => {
+    setPage(1);
+    setSelectedRoomType("");
+    setSelectedTone("");
+    setSelectedRoomColor("");
+    setSelectedRoomLight("");
+    setSelectedProduct("");
+    setSelectedProductColor("");
+    setSelectedAngle("");
+    setSelectedSearchBar("");
+
+    if (isSearchBtnClick) setSearchBtnClick(false);
+    else setSearchBtnClick(true);
+  };
+
   const downloadImage = (imageUrl) => {
     fetch(imageUrl)
       .then((response) => response.blob())
@@ -344,10 +359,17 @@ function Header() {
           <div className="form-group col-md-2">
             <button
               type="submit"
-              className="btn btn-primary btn-block"
+              className="btn btn-primary "
               onClick={(e) => btnSearchClick()}
             >
               Search
+            </button>
+            <button
+              type="button"
+              className="btn btn-secondary ml-2"
+              onClick={(e) => btnResetClick()}
+            >
+              Reset
             </button>
           </div>
         </div>
@@ -368,7 +390,6 @@ function Header() {
                 <div className="pl-3">Results: {APIData.length}</div>
               </div>
             </div>
-
             <div className="row">
               {APIData &&
                 APIData.map((data, index) => (
