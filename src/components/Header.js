@@ -390,6 +390,7 @@ function Header() {
                           e.target.style.background = "#f8f8f8";
                         }}
                       />
+                      <p className="text-over-img">{data.image}</p>
 
                       <div className="card-body">
                         <h5 className="card-title">{data.product}</h5>
