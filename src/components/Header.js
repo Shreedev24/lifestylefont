@@ -381,7 +381,7 @@ function Header() {
                         className="card-img-top img-fluid object-fit-contain"
                         style={{
                           minHeight: "348px",
-                          objectFit: "none",
+                          objectFit: "scale-down",
                           background: "#f8f8f8",
                         }}
                         onError={(e) => {
