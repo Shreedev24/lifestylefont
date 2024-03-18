@@ -4,14 +4,12 @@ import axios from "axios";
 import roomdata from "../roomdata.json";
 import { useNavigate } from "react-router-dom";
 
-
 function EditForm() {
   let { id } = useParams();
-  const navigate = useNavigate( );
-  const renderDropdownOptions = (key)=> {
+  const navigate = useNavigate();
+  const renderDropdownOptions = (key) => {
     if (
-      roomdata.hasOwnProperty(key)
- &&
+      roomdata.hasOwnProperty(key) &&
       Array.isArray(roomdata[key]["options"])
     ) {
       return roomdata[key]["options"].map((item, index) => (
@@ -77,6 +75,10 @@ function EditForm() {
       .catch((error) => {
         console.error("Edit Error:", error);
       });
+  };
+
+  const btnResetClick = () => {
+    window.history.back();
   };
 
   return (
@@ -201,13 +203,22 @@ function EditForm() {
       </div>
 
       <div className="form-row align-items-end">
-        <div className="form-group col-md-12">
+        <div className="form-group col-md-8">
           <button
             type="submit"
             className="btn btn-primary btn-block"
             onClick={handleSave}
           >
             Save Room
+          </button>
+        </div>
+        <div className="form-group col-md-4">
+          <button
+            type="button"
+            className="btn btn-secondary ml-2 btn-block"
+            onClick={(e) => btnResetClick()}
+          >
+            Reset
           </button>
         </div>
       </div>
