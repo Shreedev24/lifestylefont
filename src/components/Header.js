@@ -397,6 +397,23 @@ function Header() {
                       <div className="card-body">
                         <h5 className="card-title">{data.product}</h5>
 
+                        {/* <p className="card-text">
+                          <button
+                            type="button"
+                            className="btn btn-outline-secondary"
+                          >
+                            {data.roomType}
+                          </button>
+                          <button
+                            type="button"
+                            className="btn btn-outline-light ml-2"
+                            style={{
+                              background: "#fff",
+                            }}
+                          >
+                            {data.roomColor}
+                          </button>
+                        </p> */}
                         <p className="card-text">
                           <OverlayTrigger
                             placement="top"
