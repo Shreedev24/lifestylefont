@@ -381,6 +381,7 @@ function Header() {
             <hr />
           </div>
         </div>
+       
         {isLoading ? (
           <p>Loading...</p>
         ) : (
@@ -529,11 +530,16 @@ function Header() {
                   </div>
                 ))}
             </div>
-            <Pagination
-              currentPage={page}
-              totalPages={totalPages}
-              onPageChange={handlePageChange}
-            />
+            {totalRecords ? (
+                <Pagination
+                currentPage={page}
+                totalPages={totalPages}
+                onPageChange={handlePageChange}
+              />
+            ):("") }
+          
+            
+
           </>
         )}
       </div>
