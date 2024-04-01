@@ -22,7 +22,7 @@
         }
     },
     "productType": {
-        "options": ["Book shelf", "Side Table","Bedside","Chair","Sofas", "Beds", "Dining Table", "TV Unit", "Cabinet", "Shoe racks", "Wardrobe", "Coffee Tables", "Recliners", "Sideboards", "Desks", "Garden furniture", "Kids furniture", "Chest of drawers"]
+        "options": ["Bedside","Beds","Cabinet","Chair","Chest of drawers","Coffee Tables","Desks","Dining Table","Garden furniture","Kids furniture","Recliners","Shoe racks","Side Table","Sideboards","Sofas","TV Unit","Wardrobe","Book shelf"]
     },
     "productAngle": {
         "options": ["Front", "Side", "Top", "Isometric", "Close-up", "Room view"]
