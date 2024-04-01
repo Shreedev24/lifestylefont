@@ -166,6 +166,7 @@ function Header() {
   }, [isSearchBtnClick, page]);
 
   const btnSearchClick = () => {
+    console.log("hello");
     setPage(1);
     if (isSearchBtnClick) setSearchBtnClick(false);
     else setSearchBtnClick(true);
@@ -249,9 +250,12 @@ function Header() {
               name="roomType"
               className="form-control"
               value={setRoomType}
-              onChange={(e) => setSelectedRoomType(e.target.value)}
+              onChange={(e) => {
+                setSelectedRoomType(e.target.value);
+                btnSearchClick();
+              }}
             >
-              <option value="">Select Type</option>
+              <option value="">Select Room Type</option>
               {renderDropdownOptions("roomType")}
             </select>
           </div>
@@ -263,9 +267,12 @@ function Header() {
               name="tone"
               className="form-control"
               value={setTone}
-              onChange={(e) => setSelectedTone(e.target.value)}
+              onChange={(e) => {
+                setSelectedTone(e.target.value);
+                btnSearchClick();
+              }}
             >
-              <option value="">Select tone</option>
+              <option value="">Select Room Tone</option>
               {renderDropdownOptions("roomTone")}
             </select>
           </div>
@@ -277,9 +284,12 @@ function Header() {
               name="roomColor"
               className="form-control"
               value={setRoomColor}
-              onChange={(e) => setSelectedRoomColor(e.target.value)}
+              onChange={(e) => {
+                setSelectedRoomColor(e.target.value);
+                btnSearchClick();
+              }}
             >
-              <option value="">Select Color</option>
+              <option value="">Select Room Color</option>
               {renderDropdownOptions("roomColorType")}
             </select>
           </div>
@@ -291,9 +301,12 @@ function Header() {
               name="roomLight"
               className="form-control"
               value={setRoomLight}
-              onChange={(e) => setSelectedRoomLight(e.target.value)}
+              onChange={(e) => {
+                setSelectedRoomLight(e.target.value);
+                btnSearchClick();
+              }}
             >
-              <option value="">Select room light</option>
+              <option value="">Select Room Light</option>
               {renderDropdownOptions("roomLight")}
             </select>
           </div>
@@ -305,9 +318,12 @@ function Header() {
               name="product"
               className="form-control"
               value={setProduct}
-              onChange={(e) => setSelectedProduct(e.target.value)}
+              onChange={(e) => {
+                setSelectedProduct(e.target.value);
+                btnClick();
+              }}
             >
-              <option value="">Select Product</option>
+              <option value="">Select Product Type</option>
               {renderDropdownOptions("productType")}
             </select>
           </div>
@@ -319,9 +335,12 @@ function Header() {
               name="productColor"
               className="form-control"
               value={setProductColor}
-              onChange={(e) => setSelectedProductColor(e.target.value)}
+              onChange={(e) => {
+                setSelectedProductColor(e.target.value);
+                btnSearchClick();
+              }}
             >
-              <option value="">Select Color</option>
+              <option value="">Select Product Color</option>
               {renderDropdownOptions("productColorType")}
             </select>
           </div>
@@ -333,9 +352,14 @@ function Header() {
               name="angle"
               className="form-control"
               value={setAngle}
-              onChange={(e) => setSelectedAngle(e.target.value)}
+              onChange={(e) => {
+                setSelectedAngle(e.target.value);
+                btnSearchClick();
+              }}
             >
-              <option value="">Select angle</option>
+              <option value="" disabled selected hidden>
+                Select Product Angle
+              </option>
               {renderDropdownOptions("productAngle")}
             </select>
           </div>
