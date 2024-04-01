@@ -357,9 +357,7 @@ function Header() {
                 btnSearchClick();
               }}
             >
-              <option value="" disabled selected hidden>
-                Select Product Angle
-              </option>
+              <option value="">Select Product Angle</option>
               {renderDropdownOptions("productAngle")}
             </select>
           </div>
