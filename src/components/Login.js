@@ -10,34 +10,32 @@ class Login extends Component {
   };
 
   handlePasswordChange = (event) => {
-    this.setState({ password: event.target.value });
-  };
-
-  handleSubmit = (event) => {
     event.preventDefault();
     // Example pre-hashed password using MD5. Replace "your-static-password" with your actual password.
     const hashedPassword = md5("Indcr@2026");
-    if (md5(this.state.password) === hashedPassword) {
-      this.setState({ isAuthenticated: true });
+    if (md5(document.getElementById("password").value) === hashedPassword) {
+      localStorage.setItem("isAuthenticated", true);
+      location.reload();
     } else {
       this.setState({ errorMessage: "Invalid Password. Try again." });
     }
   };
 
+  // handleSubmit = (event) => {};
+
   renderLoginForm = () => {
     return (
       <div style={styles.container}>
-        <form onSubmit={this.handleSubmit} style={styles.form}>
+        <form style={styles.form}>
           <label style={styles.label}>
             Password:
-            <input
-              type="password"
-              value={this.state.password}
-              onChange={this.handlePasswordChange}
-              style={styles.input}
-            />
+            <input id="password" type="password" style={styles.input} />
           </label>
-          <button type="submit" style={styles.button}>
+          <button
+            type="submit"
+            onClick={this.handlePasswordChange}
+            style={styles.button}
+          >
             Login
           </button>
           {this.state.errorMessage && (
@@ -49,7 +47,11 @@ class Login extends Component {
   };
 
   render() {
-    return this.state.isAuthenticated ? <Home /> : this.renderLoginForm();
+    return localStorage.getItem("isAuthenticated") ? (
+      <Home />
+    ) : (
+      this.renderLoginForm()
+    );
   }
 }
 
