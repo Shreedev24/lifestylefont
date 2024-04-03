@@ -320,7 +320,7 @@ function Header() {
               value={setProduct}
               onChange={(e) => {
                 setSelectedProduct(e.target.value);
-                btnClick();
+                btnSearchClick();
               }}
             >
               <option value="">Select Product Type</option>
