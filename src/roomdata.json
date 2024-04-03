@@ -22,7 +22,7 @@
         }
     },
     "productType": {
-        "options": ["Bedside","Beds","Book shelf","Cabinet","Chair","Chest of drawers","Coffee Tables","Desks","Dining Table","Recliners","Shoe racks","Side Table","Sideboards","Sofas","TV Unit"]
+        "options": ["Bedside","Beds","Book shelf","Cabinet / Sideboard","Chair","Chest of drawers","Coffee Tables","Desks","Dining Table","Recliners","Side Table","Sofas","TV Unit"]
     },
     "productAngle": {
         "options": ["Front", "Side", "Top", "Isometric", "Close-up", "Room view"]
@@ -35,7 +35,7 @@
     },
     
     "roomLight": {
-        "options": ["Bright", "Soft", "Dim", "Natural"],
+        "options": ["Sun Light","Nuetral"],
         "definitions": {
             "Bright": "Provides high illumination, suitable for work areas or task lighting.",
             "Soft": "Gentle and diffused light that creates a cozy and inviting atmosphere.",
