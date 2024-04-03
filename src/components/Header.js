@@ -100,7 +100,6 @@ function Header() {
   const [setRoomColor, setSelectedRoomColor] = useState("");
   const [setAngle, setSelectedAngle] = useState("");
   const [setRoomLight, setSelectedRoomLight] = useState("");
-  const [setTone, setSelectedTone] = useState("");
   const [setSearchBar, setSelectedSearchBar] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [isSearchBtnClick, setSearchBtnClick] = useState(false);
@@ -141,7 +140,6 @@ function Header() {
       roomColor: setRoomColor,
       angle: setAngle,
       roomLight: setRoomLight,
-      tone: setTone,
       searchBar: setSearchBar,
       limit: limit,
       page: page,
@@ -175,7 +173,6 @@ function Header() {
   const btnResetClick = () => {
     setPage(1);
     setSelectedRoomType("");
-    setSelectedTone("");
     setSelectedRoomColor("");
     setSelectedRoomLight("");
     setSelectedProduct("");
@@ -243,7 +240,7 @@ function Header() {
         </div>
 
         <div className="form-row align-items-end">
-          <div className="form-group col-md-3">
+          <div className="form-group col-md-4">
             <label htmlFor="roomType">Room Type</label>
             <select
               id="roomType"
@@ -260,24 +257,7 @@ function Header() {
             </select>
           </div>
 
-          <div className="form-group col-md-3">
-            <label htmlFor="tone">Room Tone</label>
-            <select
-              id="tone"
-              name="tone"
-              className="form-control"
-              value={setTone}
-              onChange={(e) => {
-                setSelectedTone(e.target.value);
-                btnSearchClick();
-              }}
-            >
-              <option value="">Select Room Tone</option>
-              {renderDropdownOptions("roomTone")}
-            </select>
-          </div>
-
-          <div className="form-group col-md-3">
+          <div className="form-group col-md-4">
             <label htmlFor="roomColor">Room Color</label>
             <select
               id="roomColor"
@@ -294,7 +274,7 @@ function Header() {
             </select>
           </div>
 
-          <div className="form-group col-md-3">
+          <div className="form-group col-md-4">
             <label htmlFor="roomLight">Room Light</label>
             <select
               id="roomLight"
@@ -311,7 +291,7 @@ function Header() {
             </select>
           </div>
 
-          <div className="form-group col-md-3">
+          <div className="form-group col-md-4">
             <label htmlFor="product">Product Type</label>
             <select
               id="product"
@@ -328,7 +308,7 @@ function Header() {
             </select>
           </div>
 
-          <div className="form-group col-md-3">
+          <div className="form-group col-md-4">
             <label htmlFor="productColor">Product Color</label>
             <select
               id="productColor"
@@ -345,7 +325,7 @@ function Header() {
             </select>
           </div>
 
-          <div className="form-group col-md-3">
+          <div className="form-group col-md-4">
             <label htmlFor="angle">Product Angle</label>
             <select
               id="angle"
@@ -460,13 +440,6 @@ function Header() {
                             className="btn btn-sm btn-outline-secondary m-1"
                           >
                             {data.roomLight} light
-                          </button>
-
-                          <button
-                            type="button"
-                            className="btn btn-sm btn-outline-secondary m-1"
-                          >
-                            {data.tone} tone
                           </button>
                         </p>
 

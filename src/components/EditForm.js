@@ -30,7 +30,6 @@ function EditForm() {
   const [selectedRoomColor, setSelectedRoomColor] = useState("");
   const [selectedAngle, setSelectedAngle] = useState("");
   const [selectedRoomLight, setSelectedRoomLight] = useState("");
-  const [selectedTone, setSelectedTone] = useState("");
   const [selectedImage, setSelectedImage] = useState("");
   const [isEdit, setIsEdit] = useState(false);
 
@@ -46,7 +45,6 @@ function EditForm() {
         setSelectedRoomColor(data.roomColor);
         setSelectedAngle(data.angle);
         setSelectedRoomLight(data.roomLight);
-        setSelectedTone(data.tone);
         setAPIData(data); // Update state with the received data
       })
       .catch((error) => {
@@ -63,7 +61,6 @@ function EditForm() {
       roomColor: selectedRoomColor,
       angle: selectedAngle,
       roomLight: selectedRoomLight,
-      tone: selectedTone,
     };
 
     axios
@@ -184,20 +181,6 @@ function EditForm() {
           >
             <option value="">Select Room Light</option>
             {renderDropdownOptions("roomLight")}
-          </select>
-        </div>
-
-        <div className="form-group col-md-12">
-          <label htmlFor="tone">Tone</label>
-          <select
-            id="tone"
-            name="tone"
-            className="form-control"
-            value={selectedTone}
-            onChange={(e) => setSelectedTone(e.target.value)}
-          >
-            <option value="">Select tone</option>
-            {renderDropdownOptions("roomTone")}
           </select>
         </div>
       </div>

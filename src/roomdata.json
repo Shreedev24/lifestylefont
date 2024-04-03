@@ -22,7 +22,7 @@
         }
     },
     "productType": {
-        "options": ["Bedside","Beds","Book shelf","Cabinet","Chair","Chest of drawers","Coffee Tables","Desks","Dining Table","Garden furniture","Kids furniture","Recliners","Shoe racks","Side Table","Sideboards","Sofas","TV Unit","Wardrobe"]
+        "options": ["Bedside","Beds","Book shelf","Cabinet","Chair","Chest of drawers","Coffee Tables","Desks","Dining Table","Recliners","Shoe racks","Side Table","Sideboards","Sofas","TV Unit"]
     },
     "productAngle": {
         "options": ["Front", "Side", "Top", "Isometric", "Close-up", "Room view"]
@@ -41,16 +41,6 @@
             "Soft": "Gentle and diffused light that creates a cozy and inviting atmosphere.",
             "Dim": "Subdued lighting, perfect for creating a relaxed and intimate ambiance.",
             "Natural": "Light that comes from natural sources like sunlight, creating a warm and welcoming environment."
-        }
-    },
-    "roomTone": {
-        "options": ["Warm", "Cool", "Neutral", "Dark", "Light"],
-        "definitions": {
-            "Warm": "Colors that evoke feelings of warmth and coziness, like reds, oranges, and yellows.",
-            "Cool": "Colors that create a sense of calm and serenity, like blues, greens, and purples.",
-            "Neutral": "Colors that are versatile and easy to pair with other hues, like beige, gray, and white.",
-            "Dark": "Deep and rich colors that add drama and sophistication to a space, like navy blue, charcoal, and burgundy.",
-            "Light": "Soft and airy colors that make a space feel open and spacious, like pastel shades and whites."
         }
     }
 }

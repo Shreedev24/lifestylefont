@@ -3,16 +3,18 @@ import axios from "axios";
 import roomdata from "../roomdata.json";
 import Card from "react-bootstrap/Card";
 import { useNavigate } from "react-router-dom";
-import Toast from 'react-bootstrap/Toast';
-
+import Toast from "react-bootstrap/Toast";
 
 function Form() {
-  console.log("definitions",roomdata["productType"]["options"])
-  const navigate = useNavigate( );
+  console.log("definitions", roomdata["productType"]["options"]);
+  const navigate = useNavigate();
   const [showToast, setShowToast] = useState(false);
   const renderDropdownOptions = (key) => {
     // Check if the key exists in roomdata and it is an array
-    if (roomdata.hasOwnProperty(key) && Array.isArray(roomdata[key]["options"])) {
+    if (
+      roomdata.hasOwnProperty(key) &&
+      Array.isArray(roomdata[key]["options"])
+    ) {
       // Map over the array and generate dropdown options
       return roomdata[key]["options"].map((item, index) => (
         <option key={index} value={item}>
@@ -35,7 +37,6 @@ function Form() {
   const [setRoomColor, setSelectedRoomColor] = useState([]);
   const [setAngle, setSelectedAngle] = useState([]);
   const [setRoomLight, setSelectedRoomLight] = useState([]);
-  const [setTone, setSelectedTone] = useState([]);
   const [setImage, setSelectedImage] = useState([]);
 
   // const handleclick = () => {
@@ -55,14 +56,13 @@ function Form() {
       roomColor: setRoomColor,
       angle: setAngle,
       roomLight: setRoomLight,
-      tone: setTone,
     };
 
     axios
       .post(`https://data-7.onrender.com/api/saveLifestyle`, dataToSend)
       .then((response) => {
         console.log("response", response);
-        setShowToast(true); 
+        setShowToast(true);
         setTimeout(() => setShowToast(false), 3000);
         navigate(-1);
       });
@@ -172,20 +172,6 @@ function Form() {
             {renderDropdownOptions("roomLight")}
           </select>
         </div>
-
-        <div className="form-group col-md-12">
-          <label htmlFor="tone">Tone</label>
-          <select
-            id="tone"
-            name="tone"
-            className="form-control"
-            value={setTone}
-            onChange={(e) => setSelectedTone(e.target.value)}
-          >
-            <option value="">Select tone</option>
-            {renderDropdownOptions("roomTone")}
-          </select>
-        </div>
       </div>
 
       <div className="form-row align-items-end">
@@ -205,7 +191,7 @@ function Form() {
         show={showToast}
         onClose={() => setShowToast(false)}
         style={{
-          position: 'absolute',
+          position: "absolute",
           top: 20,
           right: 20,
         }}
