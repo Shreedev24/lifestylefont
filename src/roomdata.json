@@ -22,13 +22,13 @@
         }
     },
     "productType": {
-        "options": ["Bedside","Beds","Book shelf","Cabinet / Sideboard","Chair","Chest of drawers","Coffee Tables","Desks","Dining Table","Recliners","Side Table","Sofas","TV Unit"]
+        "options": ["Bedside","Beds","Book shelf","Cabinet / Sideboard","Chair","Chest of Drawers","Coffee Tables","Desks","Dining Table","Recliners","Side Table","Sofas","TV Unit"]
     },
     "productAngle": {
         "options": ["Front", "Side", "Top", "Isometric", "Close-up", "Room view"]
     },
     "productColorType":{
-        "options":["Brown", "Cream", "White", "Grey", "Orange", "Golden", "Wooden", "Green", "yellow", "Black", "Blue"]
+        "options":["Brown", "Cream", "White", "Grey", "Orange", "Golden", "Wooden", "Green", "Yellow", "Black", "Blue"]
     }, 
     "roomColorType":{
         "options": ["Brown", "Cream", "White", "Grey", "Orange", "Golden", "Wooden", "Green", "yellow", "Black", "Blue"]
