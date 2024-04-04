@@ -390,7 +390,10 @@ function Header() {
           <>
             <div className="row">
               <div className="col-md-12 py-3">
-                <div className="pl-3">Results: {APIData.length}</div>
+                <div className="pl-3">
+                  Results:
+                  {` ${Math.min((page - 1) * limit + 1, totalRecords)} to ${Math.min(page * limit, totalRecords)} out of ${totalRecords}`}
+                </div>
               </div>
             </div>
             <div className="row">

@@ -83,7 +83,15 @@ function EditForm() {
       <div className="text-center py-3">
         <h1>Edit Room</h1>
       </div>
-
+      {selectedImage && (
+        <div className="text-center">
+          <img
+            src={`https://backendlifestyle.netlify.app/images/${selectedImage}`}
+            alt="Room"
+            style={{ maxWidth: "100%", maxHeight: "300px" }}
+          />
+        </div>
+      )}
       <div className="form-row align-items-end">
         <div className="form-group col-md-12">
           <label htmlFor="image">Image</label>

@@ -22,7 +22,7 @@
         }
     },
     "productType": {
-        "options": ["Bedside","Beds","Book shelf","Cabinet / Sideboard","Chair","Chest of Drawers","Coffee Tables","Desks","Dining Table","Recliners","Side Table","Sofas","TV Unit"]
+        "options": ["Bedside","Beds","Book Shelf","Cabinet / Sideboard","Chair","Chest of Drawers","Coffee Tables","Desks","Dining Table","Recliners","Side Table","Sofas","TV Unit"]
     },
     "productAngle": {
         "options": ["Front", "Side", "Top", "Close-up", "Room view"]
