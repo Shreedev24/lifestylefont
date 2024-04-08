@@ -28,10 +28,10 @@
         "options": ["Front", "Side", "Top", "Close-up", "Room view"]
     },
     "productColorType":{
-        "options":["Brown", "Cream", "White", "Grey", "Orange", "Golden", "Wooden", "Green", "Yellow", "Black", "Blue"]
+        "options":["Brown", "Cream", "White", "Grey", "Orange", "Wooden", "Black", "Blue"]
     }, 
     "roomColorType":{
-        "options": ["Brown", "Cream", "White", "Grey", "Orange", "Golden", "Wooden", "Green", "Yellow", "Black", "Blue"]
+        "options": ["Brown", "Cream", "White", "Grey", "Orange", "Wooden", "Green", "Yellow", "Black", "Blue"]
     },
     
     "roomLight": {
