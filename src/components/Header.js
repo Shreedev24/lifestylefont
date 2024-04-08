@@ -103,7 +103,7 @@ function Header() {
   const [setSearchBar, setSelectedSearchBar] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [isSearchBtnClick, setSearchBtnClick] = useState(false);
-  const limit = 30;
+  const limit = 60;
 
   var dataToSend = {};
 
@@ -391,8 +391,8 @@ function Header() {
             <div className="row">
               <div className="col-md-12 py-3">
                 <div className="pl-3">
-                  Results:
-                  {` ${Math.min((page - 1) * limit + 1, totalRecords)} to ${Math.min(page * limit, totalRecords)} out of ${totalRecords}`}
+                  Showing
+                  {` ${Math.min((page - 1) * limit + 1, totalRecords)} to ${Math.min(page * limit, totalRecords)} of ${totalRecords} entries`}
                 </div>
               </div>
             </div>

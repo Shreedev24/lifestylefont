@@ -88,7 +88,7 @@ function EditForm() {
           <img
             src={`https://backendlifestyle.netlify.app/images/${selectedImage}`}
             alt="Room"
-            style={{ maxWidth: "100%", maxHeight: "300px" }}
+            style={{ maxWidth: "100%", maxHeight: "300px" , border: "solid" }}
           />
         </div>
       )}
